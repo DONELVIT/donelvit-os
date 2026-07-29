@@ -1,4 +1,5 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { demoProjects } from "@/lib/demo-data";
 import type { ProjectDetails, ProjectDocument, ProjectListItem, ProjectSystem, SelectOption } from "@/lib/types";
 
 const projectSelect = `
@@ -22,17 +23,31 @@ function mapProject(row:any):ProjectDetails {
   todoist_url:row.todoist_url
  };
 }
+function demoProjectDetails(project: ProjectListItem): ProjectDetails {
+ return {...project,client_id:0,object_id:null,project_type_id:0,start_date:null,notes:null,location:null,created_at:"",updated_at:"",drive_folder_url:null,todoist_url:null};
+}
+
+function hasPublicSupabaseConfig() {
+ return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+}
+
 export async function getProjects():Promise<ProjectListItem[]> {
+ if (!hasPublicSupabaseConfig()) return demoProjects;
  const s=createServerSupabaseClient(); if(!s) throw new Error("Supabase не настроен.");
  const {data,error}=await s.from("projects").select(projectSelect).order("created_at",{ascending:false});
  if(error) throw new Error(error.message); return (data??[]).map(mapProject);
 }
 export async function getProject(id:number):Promise<ProjectDetails|null>{
+ if (!hasPublicSupabaseConfig()) {
+  const project=demoProjects.find((item)=>item.id===id);
+  return project ? demoProjectDetails(project) : null;
+ }
  const s=createServerSupabaseClient(); if(!s) throw new Error("Supabase не настроен.");
  const {data,error}=await s.from("projects").select(projectSelect).eq("id",id).maybeSingle();
  if(error) throw new Error(error.message); return data?mapProject(data):null;
 }
 export async function getProjectOptions(){
+ if (!hasPublicSupabaseConfig()) return {clients:[] as SelectOption[],objects:[] as SelectOption[],types:[] as SelectOption[]};
  const s=createServerSupabaseClient(); if(!s) throw new Error("Supabase не настроен.");
  const [c,o,t]=await Promise.all([
   s.from("clients").select("id, legal_name").eq("is_active",true).order("legal_name"),
@@ -43,12 +58,14 @@ export async function getProjectOptions(){
  return {clients:(c.data??[]).map((x:any)=>({id:x.id,name:x.legal_name})),objects:(o.data??[]) as SelectOption[],types:(t.data??[]) as SelectOption[]};
 }
 export async function getProjectSystems(projectId:number):Promise<ProjectSystem[]>{
+ if (!hasPublicSupabaseConfig()) return [];
  const s=createServerSupabaseClient(); if(!s) throw new Error("Supabase не настроен.");
  const {data,error}=await s.from("project_systems").select(`notes, system_types!project_systems_system_type_id_fkey(id,code,name,description)`).eq("project_id",projectId);
  if(error) throw new Error(error.message);
  return (data??[]).map((r:any)=>({id:r.system_types?.id,code:r.system_types?.code??"—",name:r.system_types?.name??"Система",description:r.system_types?.description??null,notes:r.notes??null}));
 }
 export async function getProjectDocuments(projectId:number):Promise<ProjectDocument[]>{
+ if (!hasPublicSupabaseConfig()) return [];
  const s=createServerSupabaseClient(); if(!s) throw new Error("Supabase не настроен.");
  const {data,error}=await s.from("documents").select("id,document_type,document_number,title,status,revision,issued_at,drive_file_url").eq("project_id",projectId).order("created_at",{ascending:false});
  if(error) throw new Error(error.message); return (data??[]) as ProjectDocument[];

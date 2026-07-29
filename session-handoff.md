@@ -39,6 +39,12 @@
 | Corrected Projects registry notice | Deployment `dpl_5Tauc4mjJM1QKrmECxYw4Lax9hrL`, Vercel fetch | Passed | `READY` on 2026-07-29; no build errors and production `/projects` presents the employee write-access notice. |
 | GitHub → Vercel production workflow | Commit `8900e39`, deployment `dpl_F7qmh1dRmiaySppYszriviCec5kg` | Passed | Commit was pushed to `main`; Vercel reports source `git`, Git metadata for that commit, `READY`, and no build errors. |
 
+## Latest Verification
+
+- 2026-07-29: Restored the documented no-Supabase demo fallback in `lib/data/projects.ts`; project registry/detail reads use demo fixtures, while write-option reads return safe empty values. Added validation for invalid project route IDs.
+- `npm run typecheck` passed after these changes. `npm run build` remains blocked by the known Windows sandbox `spawn EPERM` during Next.js compilation; no application compilation error was reported.
+- A production browser read confirmed the project registry loads, but the available browser has no signed-in employee session. No data mutation was attempted; authenticated create → edit → archive remains mandatory acceptance evidence.
+
 ## Files Changed
 
 - `app/login/page.tsx`, `app/auth/callback/page.tsx`, `app/set-password/page.tsx`, and `components/auth-ui.tsx` — invitation-only employee sign-in, callback, password setup, and session UI.

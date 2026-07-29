@@ -28,6 +28,12 @@
 - [x] Active feature selected.
   - Activate only `mvp-001` — Projects when implementation is requested.
 
+## Latest Verification
+
+- [x] 2026-07-29: Restored the documented demo-data fallback for Projects when public Supabase configuration is absent; registry/detail reads use demo fixtures and protected write screens receive safe empty options. Invalid non-positive/non-integer project IDs now return 404 instead of querying with `NaN`.
+- [x] 2026-07-29: `npm run typecheck` passed after the change. `npm run build` again reached Next.js compilation then stopped at the known sandbox `spawn EPERM`; no application compilation error was reported.
+- [ ] Production browser check found no employee session in the available browser, so no test mutation was made. The authenticated create → edit → archive acceptance check remains the gating manual verification.
+
 ## What's Next
 
 1. Accept the already-sent employee invitation, then verify create/edit/archive using that authenticated account.

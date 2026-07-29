@@ -16,7 +16,7 @@ const tabs=[
 
 export default async function ProjectPage({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{tab?:string}>}){
  const [{id},sp]=await Promise.all([params,searchParams]);
- const projectId=Number(id); const p=await getProject(projectId); if(!p)notFound();
+ const projectId=Number(id); if(!Number.isInteger(projectId)||projectId<=0)notFound(); const p=await getProject(projectId); if(!p)notFound();
  const active=tabs.some(x=>x.id===sp.tab)?sp.tab!:"general";
  const [systems,documents]=await Promise.all([getProjectSystems(projectId),getProjectDocuments(projectId)]);
  const fields=[["Клиент",p.client_name],["Объект",p.object_name??"—"],["Вид работ",p.project_type_name??"—"],["Этап",p.stage],["Ответственный",p.responsible_person??"Не назначен"],["Дата начала",p.start_date??"—"],["Срок",p.due_date??"Не установлен"],["Стоимость",p.amount===null?"—":`${p.amount.toLocaleString("ru-RU")} ${p.currency}`]];
