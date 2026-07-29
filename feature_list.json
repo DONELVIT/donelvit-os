@@ -39,6 +39,7 @@
       "description": "Deliver the MVP client-management workflow using existing data structures and functions.",
       "dependencies": ["mvp-001"],
       "status": "in-progress",
+      "latest_verification": "2026-07-29: Implemented client registry and client detail read workflow using only existing clients, projects, objects, and contracts relations. Typecheck passed; local next build remains blocked by sandbox spawn EPERM. Existing database has no client CRUD RPCs, so mutation workflow requires explicit authorization for access rules/functions before implementation.",
       "acceptance_criteria": ["Agreed client workflow is implemented.", "Integration with Projects is verified.", "No unapproved schema change is made."],
       "evidence": "Second implementation module by user-approved order."
     },

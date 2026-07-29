@@ -41,6 +41,8 @@
 
 ## Latest Verification
 
+- 2026-07-29: Began `mvp-002` — Clients. Verified that the existing RLS-enabled `donelvit.clients` table has relations to Projects, Objects, and Contracts, but no client CRUD RPC exists. Implemented read-only registry/detail views and linked-project navigation without a schema or access-rule change. Typecheck passed; local build remains blocked by sandbox `spawn EPERM`.
+
 - 2026-07-29: Authenticated production acceptance passed for Projects under `vitalie.dones@gmail.com`. Test project CP-0013-2026 (ID 5) was created, edited, and archived; its final detail view displayed Archived.
 
 - 2026-07-29: Restored the documented no-Supabase demo fallback in `lib/data/projects.ts`; project registry/detail reads use demo fixtures, while write-option reads return safe empty values. Added validation for invalid project route IDs.
@@ -76,4 +78,4 @@
 
 ## Recommended Next Step
 
-- Inspect the existing Clients data model and route, then implement the agreed workflow without a schema change.
+- Obtain explicit approval for the client mutation access model before adding protected create/edit/archive capabilities; no existing client CRUD RPC is available.

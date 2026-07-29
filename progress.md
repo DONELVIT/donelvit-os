@@ -22,8 +22,8 @@
 ## What's In Progress
 
 - [ ] `mvp-002` — Clients
-  - Inspect the current client data model and existing route before implementing the agreed workflow.
-  - Verify Projects integration without changing the approved schema.
+  - Implemented the existing-data read workflow: registry, contact/requisite details, relation counts, and linked Projects navigation.
+  - Client create/edit/archive is pending explicit approval of its authenticated access model because the existing database has no client CRUD RPCs.
 
 - [x] `mvp-001` — Projects
   - Inspect and complete the existing project workflow using the current Supabase model only.
@@ -33,6 +33,9 @@
   - Activate only `mvp-001` — Projects when implementation is requested.
 
 ## Latest Verification
+
+- [x] 2026-07-29: Clients data model verified in Supabase: `donelvit.clients` is RLS-enabled and has existing foreign-key relations to Projects, Objects, and Contracts. No existing client-specific CRUD function is present.
+- [x] 2026-07-29: Implemented Clients registry/detail read routes with Projects integration and a no-Supabase demo fallback. `npm run typecheck` passed; `npm run build` remains blocked by the known sandbox `spawn EPERM`.
 
 - [x] 2026-07-29: Production acceptance for `mvp-001` passed as invited employee `vitalie.dones@gmail.com`: created CP-0013-2026, updated its title, then archived it. Final project detail view showed Archived.
 
