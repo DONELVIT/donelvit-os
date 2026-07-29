@@ -1,0 +1,1 @@
+import {ProjectWriteGate} from "@/components/auth-ui";import {ClientForm} from "@/components/client-form";export const dynamic="force-dynamic";export default function NewClientPage(){return <ProjectWriteGate nextPath="/clients/new"><div className="mx-auto max-w-5xl space-y-6"><h1 className="text-3xl font-bold">Создание клиента</h1><ClientForm/></div></ProjectWriteGate>}

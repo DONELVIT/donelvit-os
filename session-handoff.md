@@ -43,6 +43,7 @@
 
 - 2026-07-29: Began `mvp-002` — Clients. Verified that the existing RLS-enabled `donelvit.clients` table has relations to Projects, Objects, and Contracts, but no client CRUD RPC exists. Implemented read-only registry/detail views and linked-project navigation without a schema or access-rule change. Typecheck passed; local build remains blocked by sandbox `spawn EPERM`.
 - 2026-07-29: Verified Clients grants: `anon` and `authenticated` have SELECT only, and no write policy is present. Client mutation requires explicit access-model approval.
+- 2026-07-29: User approved Client mutation model. Added `create_client`, `update_client`, and `archive_client` RPCs with `auth.uid()` guards; verified anon EXECUTE false and authenticated EXECUTE true. Implemented protected Client create/edit/archive routes. Production acceptance remains pending.
 
 - 2026-07-29: Authenticated production acceptance passed for Projects under `vitalie.dones@gmail.com`. Test project CP-0013-2026 (ID 5) was created, edited, and archived; its final detail view displayed Archived.
 

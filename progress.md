@@ -36,6 +36,7 @@
 
 - [x] 2026-07-29: Clients data model verified in Supabase: `donelvit.clients` is RLS-enabled and has existing foreign-key relations to Projects, Objects, and Contracts. No existing client-specific CRUD function is present.
 - [x] 2026-07-29: Clients access verified: both `anon` and `authenticated` have only `SELECT`; no write policy or CRUD RPC is present. No access rule was changed.
+- [x] 2026-07-29: User approved the same authenticated employee model as Projects. Added guarded Client CRUD RPCs; all three deny anon EXECUTE, grant authenticated EXECUTE, and contain `auth.uid()` checks. Protected create/edit/archive UI routes are implemented; production acceptance remains pending.
 - [x] 2026-07-29: Implemented Clients registry/detail read routes with Projects integration and a no-Supabase demo fallback. `npm run typecheck` passed; `npm run build` remains blocked by the known sandbox `spawn EPERM`.
 
 - [x] 2026-07-29: Production acceptance for `mvp-001` passed as invited employee `vitalie.dones@gmail.com`: created CP-0013-2026, updated its title, then archived it. Final project detail view showed Archived.
