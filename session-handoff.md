@@ -3,7 +3,7 @@
 ## Current Objective
 
 - Goal: deliver DONELVIT OS MVP in the approved module order.
-- Current status: `mvp-001` — Projects is active; public reads work and project mutations are limited to invited, authenticated employees.
+- Current status: `mvp-001` — Projects is complete. `mvp-002` — Clients is active.
 - Branch / commit: local `main` is connected to `origin` (`DONELVIT/donelvit-os`); pushes to `main` trigger Vercel production deployments.
 
 ## Completed This Session
@@ -41,6 +41,8 @@
 
 ## Latest Verification
 
+- 2026-07-29: Authenticated production acceptance passed for Projects under `vitalie.dones@gmail.com`. Test project CP-0013-2026 (ID 5) was created, edited, and archived; its final detail view displayed Archived.
+
 - 2026-07-29: Restored the documented no-Supabase demo fallback in `lib/data/projects.ts`; project registry/detail reads use demo fixtures, while write-option reads return safe empty values. Added validation for invalid project route IDs.
 - `npm run typecheck` passed after these changes. `npm run build` remains blocked by the known Windows sandbox `spawn EPERM` during Next.js compilation; no application compilation error was reported.
 - A production browser read confirmed the project registry loads, but the available browser has no signed-in employee session. No data mutation was attempted; authenticated create → edit → archive remains mandatory acceptance evidence.
@@ -62,16 +64,16 @@
 - No automated test suite exists yet.
 - Git is initialized in this workspace, `origin` is `DONELVIT/donelvit-os`, and `main` is configured to trigger the Vercel production deployment. Avoid direct source uploads unless Git integration is unavailable.
 - `mvp-001` is active. Production read paths work. The three project RPCs require `auth.uid()`, deny anon/public EXECUTE, and grant EXECUTE only to authenticated users. Public signup and anonymous sign-ins are disabled; do not re-enable either.
-- An invited employee account has signed in successfully. The three authenticated project mutations still need end-to-end verification from an authenticated UI session. Do not create another account or send a duplicate invitation unless the user requests it.
+- Projects acceptance is complete: an invited employee account created, edited, and archived test project CP-0013-2026 in the production UI on 2026-07-29. Do not create another account or send a duplicate invitation unless the user requests it.
 - Supabase Security Advisor still reports a mutable search path in the unrelated `donelvit.set_updated_at` trigger function; its remediation needs separate review.
 - Supabase CLI is not installed and no local migration folder exists, so the approved production function changes have no tracked local migration yet.
 
 ## Next Session Startup
 
 1. Read `AGENTS.md`, `feature_list.json`, `progress.md`, and `docs/MVP-ROADMAP.md`.
-2. Continue exactly one active feature: `mvp-001` — Projects.
+2. Continue exactly one active feature: `mvp-002` — Clients.
 3. Run `./init.ps1` on Windows or `./init.sh` in a POSIX shell before editing.
 
 ## Recommended Next Step
 
-- In the signed-in production session, perform the authenticated create/edit/archive acceptance check.
+- Inspect the existing Clients data model and route, then implement the agreed workflow without a schema change.

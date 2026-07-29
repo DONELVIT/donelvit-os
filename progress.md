@@ -3,9 +3,9 @@
 ## Current State
 
 **Last Updated:** 2026-07-29
-**Active Feature:** `mvp-001` — Projects
+**Active Feature:** `mvp-002` — Clients
 **Operational deployment:** production deployment and GitHub → Vercel automation verified on 2026-07-29.
-**Status:** `mvp-001` — Projects is active; employee sign-in and protected write routes are live in production, with mutation acceptance pending.
+**Status:** `mvp-001` — Projects is complete. `mvp-002` — Clients is active.
 
 ## What's Done
 
@@ -21,14 +21,20 @@
 
 ## What's In Progress
 
-- [ ] `mvp-001` — Projects
+- [ ] `mvp-002` — Clients
+  - Inspect the current client data model and existing route before implementing the agreed workflow.
+  - Verify Projects integration without changing the approved schema.
+
+- [x] `mvp-001` — Projects
   - Inspect and complete the existing project workflow using the current Supabase model only.
-  - Authenticated write routes and the invitation/password-setup flow are deployed. End-to-end project mutation verification is pending the first invited employee account.
+  - Completed on 2026-07-29: authenticated production create → edit → archive acceptance passed for CP-0013-2026 (project ID 5); the final detail view displayed Archived.
 
 - [x] Active feature selected.
   - Activate only `mvp-001` — Projects when implementation is requested.
 
 ## Latest Verification
+
+- [x] 2026-07-29: Production acceptance for `mvp-001` passed as invited employee `vitalie.dones@gmail.com`: created CP-0013-2026, updated its title, then archived it. Final project detail view showed Archived.
 
 - [x] 2026-07-29: Restored the documented demo-data fallback for Projects when public Supabase configuration is absent; registry/detail reads use demo fixtures and protected write screens receive safe empty options. Invalid non-positive/non-integer project IDs now return 404 instead of querying with `NaN`.
 - [x] 2026-07-29: `npm run typecheck` passed after the change. `npm run build` again reached Next.js compilation then stopped at the known sandbox `spawn EPERM`; no application compilation error was reported.
@@ -36,7 +42,7 @@
 
 ## What's Next
 
-1. Accept the already-sent employee invitation, then verify create/edit/archive using that authenticated account.
+1. Implement `mvp-002` — Clients using the existing data model, then verify its Projects integration.
 2. Implement modules strictly in the order in `docs/MVP-ROADMAP.md`.
 3. Add regression coverage during module work and finish final testing under `mvp-009`.
 
@@ -46,7 +52,7 @@
 - [ ] The GitHub repository now contains the current source and is connected to Vercel. Keep future releases on `main` so the Git-triggered production workflow remains the source of truth.
 - [ ] No automated test runner exists, so build/typecheck alone do not prove route behaviour.
 - [ ] Local `next build` is blocked by this Windows sandbox with `spawn EPERM` after TypeScript succeeds; use the successful Vercel production build as build evidence until the local execution limitation is resolved.
-- [ ] The three authenticated project mutations still need end-to-end verification before `mvp-001` can be closed. On 2026-07-29, an `email_provider_disabled` login error was corrected by re-enabling the Supabase Email provider; subsequent authenticated `/user` requests from production confirmed successful employee sign-in. Public signup and anonymous sign-ins remain disabled.
+- [x] The three authenticated project mutations were verified in production on 2026-07-29: CP-0013-2026 was created, updated, then archived under the invited employee account. Public signup and anonymous sign-ins remain disabled.
 - [ ] Supabase security advisor warns that `donelvit.set_updated_at` has a mutable function search path. It is outside the project-mutation fix and requires a separately reviewed trigger-function change.
 - [ ] Supabase CLI is unavailable locally and the workspace has no migration directory. The approved function changes were applied directly and documented here; create a tracked migration after GitHub/Supabase CLI access is available.
 

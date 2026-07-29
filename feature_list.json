@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "mvp-001",
+  "active_feature_id": "mvp-002",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -27,7 +27,8 @@
       "name": "Projects",
       "description": "Deliver the MVP project-management workflow using existing data structures and functions.",
       "dependencies": ["mvp-000"],
-      "status": "in-progress",
+      "status": "complete",
+      "completion_evidence": "2026-07-29: Production acceptance completed as invited employee vitalie.dones@gmail.com. Created CP-0013-2026 (project ID 5), updated its title, then archived it; final production detail view displayed status Archived. No schema or RLS change was made during acceptance. npm run typecheck passed; local next build remains blocked by the documented sandbox spawn EPERM.",
       "latest_verification": "2026-07-29: Restored the documented no-Supabase demo fallback for the project registry/detail reads and return safe empty project options. Typecheck passed. Local next build remains blocked by the Windows sandbox spawn EPERM limitation. Production authenticated create/edit/archive acceptance remains required before completion.",
       "acceptance_criteria": ["Agreed project workflow is implemented.", "No unapproved schema change is made.", "Manual verification and baseline checks are recorded."],
       "evidence": "Activated on 2026-07-29 after production deployment recovery. The user approved the access rule: all invited, authenticated employees may mutate Projects; public signup and anonymous sign-ins are disabled in Supabase Auth. Production deployment dpl_E7Kem5SnmYHkJCA5JmmXkhZF2zdG reached READY with email/password sign-in, invite callback and password-setup routes, session status, and protected create/edit routes. create_project, update_project, and archive_project now require auth.uid(), deny anon EXECUTE, and grant EXECUTE only to authenticated; all six privileges and all guards were verified. Browser verification confirmed login rendering and /projects/new redirects an unauthenticated visitor to /login?next=/projects/new. On user authorization, an invitation was sent to the supplied employee email through Supabase on 2026-07-29. A login failure was traced to the Supabase Email provider being disabled; it was re-enabled and its persisted dashboard state is Enabled, while public signup and anonymous sign-ins remain disabled. Auth logs subsequently confirmed successful authenticated /user requests from the production site. Production deployment dpl_5Tauc4mjJM1QKrmECxYw4Lax9hrL is READY and verified to show the authenticated-employee write-access notice and New Project control. GitHub integration was restored: commit 8900e39 pushed to main triggered Git deployment dpl_F7qmh1dRmiaySppYszriviCec5kg, which reached READY without build errors. Real authenticated create/edit/archive verification remains pending."
@@ -37,7 +38,7 @@
       "name": "Clients",
       "description": "Deliver the MVP client-management workflow using existing data structures and functions.",
       "dependencies": ["mvp-001"],
-      "status": "planned",
+      "status": "in-progress",
       "acceptance_criteria": ["Agreed client workflow is implemented.", "Integration with Projects is verified.", "No unapproved schema change is made."],
       "evidence": "Second implementation module by user-approved order."
     },
