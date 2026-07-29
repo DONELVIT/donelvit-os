@@ -50,7 +50,7 @@
       "description": "Deliver the MVP object-management workflow using existing data structures and functions.",
       "dependencies": ["mvp-002"],
       "status": "in-progress",
-      "latest_verification": "2026-07-29: Implemented Objects registry using existing objects, clients, and projects relations. Typecheck passed. Objects grants remain SELECT-only; mutation workflow requires explicit approval.",
+      "latest_verification": "2026-07-29: Implemented Objects registry, detail, protected create/edit/archive UI, and client linkage. User approved is_active archive field and guarded Objects RPCs; anon has no EXECUTE and authenticated does. Typecheck passed; production acceptance pending.",
       "acceptance_criteria": ["Agreed object workflow is implemented.", "Links to Clients and Projects are verified.", "No unapproved schema change is made."],
       "evidence": "Third implementation module by user-approved order."
     },

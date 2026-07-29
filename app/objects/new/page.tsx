@@ -1,3 +1,4 @@
-"use client";
-import {FormEvent,useState} from "react";import {useRouter} from "next/navigation";import {createClient} from "@/lib/supabase/client";
-export default function NewObjectPage(){const r=useRouter();const [name,setName]=useState("");const [error,setError]=useState("");async function submit(e:FormEvent){e.preventDefault();const s=createClient();if(!s)return setError("Supabase не настроен.");const {data,error}=await s.rpc("create_object",{p_client_id:null,p_name:name});if(error)return setError(error.message);const x:any=Array.isArray(data)?data[0]:data;r.push(`/objects`);r.refresh()}return <form onSubmit={submit} className="mx-auto max-w-xl space-y-5 rounded-2xl border bg-white p-6 shadow-panel"><h1 className="text-3xl font-bold">Создание объекта</h1><label><span className="mb-2 block font-semibold">Наименование</span><input className="input" value={name} onChange={e=>setName(e.target.value)} required/></label>{error&&<p className="text-red-700">{error}</p>}<button className="rounded-xl bg-red-700 px-5 py-3 font-semibold text-white">Создать объект</button></form>}
+import {ObjectForm} from "@/components/object-form";
+import {getClients} from "@/lib/data/clients";
+export const dynamic="force-dynamic";
+export default async function NewObjectPage(){const clients=await getClients();return <div className="mx-auto max-w-3xl space-y-6"><h1 className="text-3xl font-bold">Создание объекта</h1><ObjectForm clients={clients.filter(x=>x.is_active)}/></div>}
