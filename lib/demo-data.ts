@@ -1,2 +1,60 @@
-import type {ProjectListItem} from "@/lib/types";
-export const demoProjects:ProjectListItem[]=[{id:1,project_number:"CP-0012-2026",title:"Clădirea Fabrica Articole din Tutun",stage:"Expertiză tehnică",status:"review",due_date:"2026-08-05",amount:25000,currency:"MDL",responsible_person:"Vitalie Dones",client_name:"AllSafe S.R.L.",object_name:"Fabrica Articole din Tutun"},{id:3,project_number:"CP-0002-2026",title:"IP Colegiul de Criminologie Administrare și Drept",stage:"Proiectare",status:"in_progress",due_date:"2026-08-12",amount:18000,currency:"MDL",responsible_person:"Vitalie Dones",client_name:"IP Colegiul Valeriu Bujor",object_name:"Colegiul Valeriu Bujor"},{id:18,project_number:"03",title:"Salon Optica",stage:"Verificare",status:"in_progress",due_date:null,amount:null,currency:"MDL",responsible_person:null,client_name:"Plasma RTI SRL",object_name:"Salon Optica"},{id:22,project_number:"22",title:"Cafenea MELI COFFEE & MORE",stage:"Proiectare",status:"completed",due_date:null,amount:null,currency:"MDL",responsible_person:null,client_name:"SHANDLING LOGISTIC SRL",object_name:"MELI COFFEE & MORE"}];
+import type { ProjectListItem } from "@/lib/types";
+
+export const demoProjects: ProjectListItem[] = [
+  {
+    id: 1,
+    project_number: "CP-0012-2026",
+    title: "Clădirea Fabrica Articole din Tutun",
+    stage: "Expertiză tehnică",
+    status: "review",
+    due_date: "2026-08-05",
+    amount: 25000,
+    currency: "MDL",
+    responsible_person: "Vitalie Dones",
+    client_name: "AllSafe S.R.L.",
+    object_name: "Fabrica Articole din Tutun",
+    project_type_name: null
+  },
+  {
+    id: 3,
+    project_number: "CP-0002-2026",
+    title: "IP Colegiul de Criminologie Administrare și Drept",
+    stage: "Proiectare",
+    status: "in_progress",
+    due_date: "2026-08-12",
+    amount: 18000,
+    currency: "MDL",
+    responsible_person: "Vitalie Dones",
+    client_name: "IP Colegiul Valeriu Bujor",
+    object_name: "Colegiul Valeriu Bujor",
+    project_type_name: null
+  },
+  {
+    id: 18,
+    project_number: "03",
+    title: "Salon Optica",
+    stage: "Verificare",
+    status: "in_progress",
+    due_date: null,
+    amount: null,
+    currency: "MDL",
+    responsible_person: null,
+    client_name: "Plasma RTI SRL",
+    object_name: "Salon Optica",
+    project_type_name: null
+  },
+  {
+    id: 22,
+    project_number: "22",
+    title: "Cafenea MELI COFFEE & MORE",
+    stage: "Proiectare",
+    status: "completed",
+    due_date: null,
+    amount: null,
+    currency: "MDL",
+    responsible_person: null,
+    client_name: "SHANDLING LOGISTIC SRL",
+    object_name: "MELI COFFEE & MORE",
+    project_type_name: null
+  }
+];

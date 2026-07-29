@@ -1,0 +1,36 @@
+"use client";
+import {FormEvent,useMemo,useState} from "react";
+import {useRouter} from "next/navigation";
+import {Archive,Save,X} from "lucide-react";
+import {createClient} from "@/lib/supabase/client";
+import type {ProjectDetails,SelectOption} from "@/lib/types";
+
+type Props={mode:"create"|"edit";project?:ProjectDetails;clients:SelectOption[];objects:SelectOption[];types:SelectOption[]};
+export function ProjectForm({mode,project,clients,objects,types}:Props){
+ const r=useRouter(); const [busy,setBusy]=useState(false); const [error,setError]=useState("");
+ const [v,setV]=useState({title:project?.title??"",client_id:String(project?.client_id??""),object_id:String(project?.object_id??""),project_type_id:String(project?.project_type_id??types[0]?.id??1),stage:project?.stage??"Proiectare",status:project?.status??"new",due_date:project?.due_date??"",amount:project?.amount?.toString()??"",responsible_person:project?.responsible_person??"Vitalie Dones",notes:project?.notes??""});
+ const filtered=useMemo(()=>objects.filter(o=>!v.client_id||o.client_id===Number(v.client_id)||o.client_id==null),[objects,v.client_id]);
+ const set=(k:string,x:string)=>setV(p=>({...p,[k]:x}));
+ async function submit(e:FormEvent){e.preventDefault();setError("");if(!v.title.trim())return setError("Укажите название проекта.");if(!v.client_id)return setError("Выберите клиента.");const s=createClient();if(!s)return setError("Supabase не настроен.");setBusy(true);
+ const payload={p_title:v.title.trim(),p_client_id:Number(v.client_id),p_object_id:v.object_id?Number(v.object_id):null,p_project_type_id:Number(v.project_type_id),p_stage:v.stage,p_status:v.status,p_due_date:v.due_date||null,p_amount:v.amount?Number(v.amount):null,p_currency:"MDL",p_responsible_person:v.responsible_person.trim()||null,p_notes:v.notes.trim()||null};
+ const result=mode==="create"?await s.rpc("create_project",payload):await s.rpc("update_project",{p_id:project!.id,...payload});
+ if(result.error){setError(result.error.message);setBusy(false);return;}const d:any=result.data;const id=Array.isArray(d)?d[0]?.id:d?.id;r.push(`/projects/${id??project?.id??""}`);r.refresh();}
+ async function archive(){if(!project||!confirm("Переместить проект в архив?"))return;const s=createClient();if(!s)return;setBusy(true);const {error}=await s.rpc("archive_project",{p_id:project.id});if(error){setError(error.message);setBusy(false);return;}r.push("/projects");r.refresh();}
+ return <form onSubmit={submit} className="space-y-6">
+  <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-panel"><h2 className="text-lg font-bold">Основные сведения</h2><div className="mt-5 grid gap-5 md:grid-cols-2">
+   <Field label="Название проекта" required cls="md:col-span-2"><input className="input" value={v.title} onChange={e=>set("title",e.target.value)}/></Field>
+   <Field label="Клиент" required><select className="input" value={v.client_id} onChange={e=>{set("client_id",e.target.value);set("object_id","")}}><option value="">Выберите клиента</option>{clients.map(x=><option key={x.id} value={x.id}>{x.name}</option>)}</select></Field>
+   <Field label="Объект"><select className="input" value={v.object_id} onChange={e=>set("object_id",e.target.value)}><option value="">Не выбран</option>{filtered.map(x=><option key={x.id} value={x.id}>{x.name}</option>)}</select></Field>
+   <Field label="Вид работ"><select className="input" value={v.project_type_id} onChange={e=>set("project_type_id",e.target.value)}>{types.map(x=><option key={x.id} value={x.id}>{x.name}</option>)}</select></Field>
+   <Field label="Этап выполнения"><select className="input" value={v.stage} onChange={e=>set("stage",e.target.value)}><option>Proiectare</option><option>Verificare</option><option>Expertiză tehnică</option><option>Supraveghere de autor</option></select></Field>
+   <Field label="Статус"><select className="input" value={v.status} onChange={e=>set("status",e.target.value)}><option value="new">Новый</option><option value="in_progress">В работе</option><option value="review">На проверке</option><option value="completed">Завершён</option><option value="archived">Архив</option></select></Field>
+   <Field label="Срок"><input className="input" type="date" value={v.due_date} onChange={e=>set("due_date",e.target.value)}/></Field>
+  </div></section>
+  <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-panel"><h2 className="text-lg font-bold">Организация и финансы</h2><div className="mt-5 grid gap-5 md:grid-cols-2">
+   <Field label="Стоимость, MDL"><input className="input" type="number" min="0" step="0.01" value={v.amount} onChange={e=>set("amount",e.target.value)}/></Field><Field label="Ответственный"><input className="input" value={v.responsible_person} onChange={e=>set("responsible_person",e.target.value)}/></Field><Field label="Примечания" cls="md:col-span-2"><textarea className="input min-h-28 resize-y" value={v.notes} onChange={e=>set("notes",e.target.value)}/></Field>
+  </div></section>
+  {error&&<div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">{error}</div>}
+  <div className="sticky bottom-4 flex flex-wrap justify-between gap-3 rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-lg backdrop-blur"><div>{mode==="edit"&&project?.status!=="archived"?<button type="button" onClick={archive} disabled={busy} className="inline-flex items-center gap-2 rounded-xl border border-amber-300 px-4 py-3 text-sm font-semibold text-amber-800"><Archive size={17}/>В архив</button>:null}</div><div className="flex gap-3"><button type="button" onClick={()=>r.back()} className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold"><X size={17}/>Отмена</button><button disabled={busy} className="inline-flex items-center gap-2 rounded-xl bg-red-700 px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"><Save size={17}/>{busy?"Сохранение...":mode==="create"?"Создать проект":"Сохранить"}</button></div></div>
+ </form>;
+}
+function Field({label,required,cls="",children}:{label:string;required?:boolean;cls?:string;children:React.ReactNode}){return <label className={cls}><span className="mb-2 block text-sm font-semibold text-slate-700">{label}{required&&<span className="text-red-700"> *</span>}</span>{children}</label>}

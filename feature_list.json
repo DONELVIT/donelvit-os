@@ -1,0 +1,107 @@
+{
+  "project": "DONELVIT OS MVP",
+  "status_values": ["planned", "in-progress", "blocked", "complete"],
+  "active_feature_id": "mvp-001",
+  "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
+  "features": [
+    {
+      "id": "harness-001",
+      "name": "Agent engineering harness",
+      "description": "Reliable agent workflow: instructions, state, verification, scope, lifecycle, and safety boundaries.",
+      "dependencies": [],
+      "status": "complete",
+      "acceptance_criteria": ["Harness is project-specific and structurally valid.", "Standard typecheck and production build pass."],
+      "evidence": "2026-07-29: `./init.ps1 -SkipInstall` passed; harness structural validation scored 100/100."
+    },
+    {
+      "id": "mvp-000",
+      "name": "MVP concept and implementation constraints",
+      "description": "Freeze MVP module composition and use existing Supabase tables/functions without schema redesign.",
+      "dependencies": ["harness-001"],
+      "status": "complete",
+      "acceptance_criteria": ["MVP module order is recorded.", "No schema redesign is in the roadmap.", "GitHub access status is recorded."],
+      "evidence": "User-confirmed on 2026-07-29: MVP concept/modules agreed; existing Supabase structure analysed; use existing tables/functions; GitHub repository access is not yet available. Operational note: Vercel production was recovered from the local workspace, but the GitHub source branch still needs the dependency changes committed."
+    },
+    {
+      "id": "mvp-001",
+      "name": "Projects",
+      "description": "Deliver the MVP project-management workflow using existing data structures and functions.",
+      "dependencies": ["mvp-000"],
+      "status": "in-progress",
+      "acceptance_criteria": ["Agreed project workflow is implemented.", "No unapproved schema change is made.", "Manual verification and baseline checks are recorded."],
+      "evidence": "Activated on 2026-07-29 after production deployment recovery. The user approved the access rule: all invited, authenticated employees may mutate Projects; public signup and anonymous sign-ins are disabled in Supabase Auth. Production deployment dpl_E7Kem5SnmYHkJCA5JmmXkhZF2zdG reached READY with email/password sign-in, invite callback and password-setup routes, session status, and protected create/edit routes. create_project, update_project, and archive_project now require auth.uid(), deny anon EXECUTE, and grant EXECUTE only to authenticated; all six privileges and all guards were verified. Browser verification confirmed login rendering and /projects/new redirects an unauthenticated visitor to /login?next=/projects/new. On user authorization, an invitation was sent to the supplied employee email through Supabase on 2026-07-29. A login failure was traced to the Supabase Email provider being disabled; it was re-enabled and its persisted dashboard state is Enabled, while public signup and anonymous sign-ins remain disabled. Auth logs subsequently confirmed successful authenticated /user requests from the production site. Production deployment dpl_5Tauc4mjJM1QKrmECxYw4Lax9hrL is READY and verified to show the authenticated-employee write-access notice and New Project control. Real authenticated create/edit/archive verification remains pending."
+    },
+    {
+      "id": "mvp-002",
+      "name": "Clients",
+      "description": "Deliver the MVP client-management workflow using existing data structures and functions.",
+      "dependencies": ["mvp-001"],
+      "status": "planned",
+      "acceptance_criteria": ["Agreed client workflow is implemented.", "Integration with Projects is verified.", "No unapproved schema change is made."],
+      "evidence": "Second implementation module by user-approved order."
+    },
+    {
+      "id": "mvp-003",
+      "name": "Objects",
+      "description": "Deliver the MVP object-management workflow using existing data structures and functions.",
+      "dependencies": ["mvp-002"],
+      "status": "planned",
+      "acceptance_criteria": ["Agreed object workflow is implemented.", "Links to Clients and Projects are verified.", "No unapproved schema change is made."],
+      "evidence": "Third implementation module by user-approved order."
+    },
+    {
+      "id": "mvp-004",
+      "name": "Documents",
+      "description": "Deliver the MVP document workflow using existing data structures and functions.",
+      "dependencies": ["mvp-003"],
+      "status": "planned",
+      "acceptance_criteria": ["Agreed document workflow is implemented.", "Relevant entity links are verified.", "No unapproved schema or storage-policy change is made."],
+      "evidence": "Fourth implementation module by user-approved order."
+    },
+    {
+      "id": "mvp-005",
+      "name": "Contracts",
+      "description": "Deliver the MVP contracts workflow using existing data structures and functions.",
+      "dependencies": ["mvp-004"],
+      "status": "planned",
+      "acceptance_criteria": ["Agreed contract workflow is implemented.", "Related entities and document references are verified.", "No unapproved schema change is made."],
+      "evidence": "Fifth implementation module by user-approved order."
+    },
+    {
+      "id": "mvp-006",
+      "name": "Expert Review",
+      "description": "Deliver the MVP expert-review workflow using existing data structures and functions.",
+      "dependencies": ["mvp-005"],
+      "status": "planned",
+      "acceptance_criteria": ["Agreed expert-review workflow is implemented.", "Related project/document behaviour is verified.", "No unapproved schema change is made."],
+      "evidence": "Sixth implementation module by user-approved order."
+    },
+    {
+      "id": "mvp-007",
+      "name": "DOCX templates",
+      "description": "Deliver approved DOCX templates and their generation/filling workflow.",
+      "dependencies": ["mvp-006"],
+      "status": "planned",
+      "acceptance_criteria": ["Required templates and source data are explicit.", "Generated DOCX files are rendered and visually checked.", "Storage and access use approved existing platform capabilities."],
+      "evidence": "Seventh implementation module by user-approved order."
+    },
+    {
+      "id": "mvp-008",
+      "name": "Authentication and roles",
+      "description": "Implement the agreed authentication and role model with explicit access rules and security verification.",
+      "dependencies": ["mvp-007"],
+      "status": "planned",
+      "acceptance_criteria": ["Login flows and roles are agreed before implementation.", "Authorization is verified for each role.", "No service-role secret is exposed; any RLS/auth change is explicitly approved."],
+      "evidence": "Eighth implementation module by user-approved order; security-sensitive design approval is required when started."
+    },
+    {
+      "id": "mvp-009",
+      "name": "Final testing and launch",
+      "description": "Perform regression verification, final user acceptance, launch preparation, and documented handoff.",
+      "dependencies": ["mvp-008"],
+      "status": "planned",
+      "acceptance_criteria": ["All MVP criteria have evidence.", "Critical workflows have repeatable regression coverage and manual acceptance evidence.", "Launch destination, rollback plan, and GitHub/deployment access are confirmed."],
+      "evidence": "Ninth and final MVP phase by user-approved order."
+    }
+  ]
+}
