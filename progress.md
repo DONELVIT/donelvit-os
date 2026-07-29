@@ -4,7 +4,7 @@
 
 **Last Updated:** 2026-07-29
 **Active Feature:** `mvp-001` — Projects
-**Operational deployment:** production deployment recovered on 2026-07-29.
+**Operational deployment:** production deployment and GitHub → Vercel automation verified on 2026-07-29.
 **Status:** `mvp-001` — Projects is active; employee sign-in and protected write routes are live in production, with mutation acceptance pending.
 
 ## What's Done
@@ -17,6 +17,7 @@
 - [x] Secured the public Projects experience: project-mutation RPC privileges were revoked and the production UI now presents a read-only registry and redirects write routes to safe read pages.
 - [x] Implemented the approved minimal employee access model for Projects: email/password sign-in by administrator invitation only, no public signup or anonymous sign-ins, and authenticated-only project-mutation RPC access.
 - [x] Corrected the stale read-only notice in the Projects registry; production now states that creation and editing are available to authenticated employees.
+- [x] Initialized and connected the workspace Git repository to `DONELVIT/donelvit-os`; pushing `main` now triggers Vercel production deployments automatically.
 
 ## What's In Progress
 
@@ -36,8 +37,7 @@
 ## Blockers / Risks
 
 - [ ] Live Supabase connectivity and RLS configuration are intentionally unverified; do not infer them from local source files.
-- [ ] GitHub repository access is not yet available; GitHub collaboration and repository-based publishing require access first.
-- [ ] The live deployment was uploaded from this local workspace. Commit and push `package.json` and `package-lock.json` to GitHub before the next Git-triggered deployment, otherwise it can deploy the old vulnerable or missing-dependency state.
+- [ ] The GitHub repository now contains the current source and is connected to Vercel. Keep future releases on `main` so the Git-triggered production workflow remains the source of truth.
 - [ ] No automated test runner exists, so build/typecheck alone do not prove route behaviour.
 - [ ] Local `next build` is blocked by this Windows sandbox with `spawn EPERM` after TypeScript succeeds; use the successful Vercel production build as build evidence until the local execution limitation is resolved.
 - [ ] The three authenticated project mutations still need end-to-end verification before `mvp-001` can be closed. On 2026-07-29, an `email_provider_disabled` login error was corrected by re-enabling the Supabase Email provider; subsequent authenticated `/user` requests from production confirmed successful employee sign-in. Public signup and anonymous sign-ins remain disabled.
@@ -62,6 +62,7 @@
 - [x] Supabase Auth dashboard verification on 2026-07-29: the Email provider is Enabled after correcting the `email_provider_disabled` sign-in failure; public signup and anonymous sign-ins remain disabled and Confirm email remains enabled.
 - [x] Supabase Auth logs on 2026-07-29: authenticated `/user` requests from `https://donelvit-os.vercel.app/` returned 200 after the Email provider correction.
 - [x] Vercel production deployment `dpl_5Tauc4mjJM1QKrmECxYw4Lax9hrL` reached `READY` on 2026-07-29. Error-only build logs reported only completion; a production fetch of `/projects` confirmed the corrected employee write-access notice and New Project control.
+- [x] Git commit `8900e39` was pushed to `DONELVIT/donelvit-os` `main` on 2026-07-29. Vercel detected that Git push and completed production deployment `dpl_F7qmh1dRmiaySppYszriviCec5kg` from source `git`; error-only logs show only build completion.
 
 ## Notes for Next Session
 

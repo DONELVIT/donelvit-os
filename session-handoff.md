@@ -4,7 +4,7 @@
 
 - Goal: deliver DONELVIT OS MVP in the approved module order.
 - Current status: `mvp-001` — Projects is active; public reads work and project mutations are limited to invited, authenticated employees.
-- Branch / commit: GitHub repository access is not yet available.
+- Branch / commit: local `main` is connected to `origin` (`DONELVIT/donelvit-os`); pushes to `main` trigger Vercel production deployments.
 
 ## Completed This Session
 
@@ -20,6 +20,7 @@
 - [x] Corrected an `email_provider_disabled` login failure by re-enabling the Supabase Email provider. The persisted dashboard state is Email Enabled; public signup and anonymous sign-ins remain disabled.
 - [x] Verified successful employee sign-in after that correction: Supabase Auth logs show authenticated `/user` requests from the production site returning 200.
 - [x] Deployed and verified the corrected Projects registry access notice: deployment `dpl_5Tauc4mjJM1QKrmECxYw4Lax9hrL` is `READY`; `/projects` states that creation and editing are available to authenticated employees.
+- [x] Restored GitHub deployment workflow: commit `8900e39` was pushed to `main`, automatically triggering Git deployment `dpl_F7qmh1dRmiaySppYszriviCec5kg`, which is `READY` with no build errors.
 
 ## Verification Evidence
 
@@ -36,6 +37,7 @@
 | Email/password sign-in availability | Supabase Authentication > Sign In / Providers | Passed | On 2026-07-29, re-enabled the Email provider after an `email_provider_disabled` login error; the dashboard now displays Email Enabled while signup and anonymous access remain disabled. |
 | Employee sign-in | Supabase Auth logs | Passed | After the provider correction, authenticated `/user` requests from the production site returned 200. |
 | Corrected Projects registry notice | Deployment `dpl_5Tauc4mjJM1QKrmECxYw4Lax9hrL`, Vercel fetch | Passed | `READY` on 2026-07-29; no build errors and production `/projects` presents the employee write-access notice. |
+| GitHub → Vercel production workflow | Commit `8900e39`, deployment `dpl_F7qmh1dRmiaySppYszriviCec5kg` | Passed | Commit was pushed to `main`; Vercel reports source `git`, Git metadata for that commit, `READY`, and no build errors. |
 
 ## Files Changed
 
@@ -50,10 +52,9 @@
 
 ## Blockers / Risks
 
-- GitHub repository access is unavailable; do not assume repository operations or deployment authority.
 - Live Supabase configuration and detailed route behaviour are unverified.
 - No automated test suite exists yet.
-- This workspace is not a Git checkout. The production deployment was uploaded directly from local files, so `package.json` and `package-lock.json` still need to be committed to GitHub before any future Git-triggered deploy.
+- Git is initialized in this workspace, `origin` is `DONELVIT/donelvit-os`, and `main` is configured to trigger the Vercel production deployment. Avoid direct source uploads unless Git integration is unavailable.
 - `mvp-001` is active. Production read paths work. The three project RPCs require `auth.uid()`, deny anon/public EXECUTE, and grant EXECUTE only to authenticated users. Public signup and anonymous sign-ins are disabled; do not re-enable either.
 - An invited employee account has signed in successfully. The three authenticated project mutations still need end-to-end verification from an authenticated UI session. Do not create another account or send a duplicate invitation unless the user requests it.
 - Supabase Security Advisor still reports a mutable search path in the unrelated `donelvit.set_updated_at` trigger function; its remediation needs separate review.
