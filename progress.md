@@ -3,9 +3,9 @@
 ## Current State
 
 **Last Updated:** 2026-07-29
-**Active Feature:** `mvp-002` — Clients
+**Active Feature:** `mvp-003` — Objects
 **Operational deployment:** production deployment and GitHub → Vercel automation verified on 2026-07-29.
-**Status:** `mvp-001` — Projects is complete. `mvp-002` — Clients is active.
+**Status:** `mvp-001` — Projects and `mvp-002` — Clients are complete. `mvp-003` — Objects is active.
 
 ## What's Done
 
@@ -33,6 +33,8 @@
   - Activate only `mvp-001` — Projects when implementation is requested.
 
 ## Latest Verification
+
+- [x] 2026-07-29: Production acceptance for `mvp-002` passed: created Client ID 5, updated its legal name, then archived it; final detail view showed an inactive client.
 
 - [x] 2026-07-29: Clients data model verified in Supabase: `donelvit.clients` is RLS-enabled and has existing foreign-key relations to Projects, Objects, and Contracts. No existing client-specific CRUD function is present.
 - [x] 2026-07-29: Clients access verified: both `anon` and `authenticated` have only `SELECT`; no write policy or CRUD RPC is present. No access rule was changed.

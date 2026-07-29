@@ -3,7 +3,7 @@
 ## Current Objective
 
 - Goal: deliver DONELVIT OS MVP in the approved module order.
-- Current status: `mvp-001` — Projects is complete. `mvp-002` — Clients is active.
+- Current status: `mvp-001` — Projects and `mvp-002` — Clients are complete. `mvp-003` — Objects is active.
 - Branch / commit: local `main` is connected to `origin` (`DONELVIT/donelvit-os`); pushes to `main` trigger Vercel production deployments.
 
 ## Completed This Session
@@ -40,6 +40,8 @@
 | GitHub → Vercel production workflow | Commit `8900e39`, deployment `dpl_F7qmh1dRmiaySppYszriviCec5kg` | Passed | Commit was pushed to `main`; Vercel reports source `git`, Git metadata for that commit, `READY`, and no build errors. |
 
 ## Latest Verification
+
+- 2026-07-29: Authenticated production acceptance passed for Clients. Test client ID 5 was created, edited, and archived; its final detail view displayed an inactive client.
 
 - 2026-07-29: Began `mvp-002` — Clients. Verified that the existing RLS-enabled `donelvit.clients` table has relations to Projects, Objects, and Contracts, but no client CRUD RPC exists. Implemented read-only registry/detail views and linked-project navigation without a schema or access-rule change. Typecheck passed; local build remains blocked by sandbox `spawn EPERM`.
 - 2026-07-29: Verified Clients grants: `anon` and `authenticated` have SELECT only, and no write policy is present. Client mutation requires explicit access-model approval.
