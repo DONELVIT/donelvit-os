@@ -3,7 +3,7 @@
 ## Current Objective
 
 - Goal: deliver DONELVIT OS MVP in the approved module order.
-- Current status: `mvp-001` — Projects and `mvp-002` — Clients are complete. `mvp-003` — Objects is active.
+- Current status: `mvp-001` — Projects, `mvp-002` — Clients, and `mvp-003` — Objects are complete. `mvp-004` — Documents is active.
 - Branch / commit: local `main` is connected to `origin` (`DONELVIT/donelvit-os`); pushes to `main` trigger Vercel production deployments.
 
 ## Completed This Session
@@ -40,6 +40,8 @@
 | GitHub → Vercel production workflow | Commit `8900e39`, deployment `dpl_F7qmh1dRmiaySppYszriviCec5kg` | Passed | Commit was pushed to `main`; Vercel reports source `git`, Git metadata for that commit, `READY`, and no build errors. |
 
 ## Latest Verification
+
+- 2026-07-29: Authenticated production acceptance passed for Objects. Test object ID 5 was created, edited, and archived; its final detail view displayed Archived.
 
 - 2026-07-29: Authenticated production acceptance passed for Clients. Test client ID 5 was created, edited, and archived; its final detail view displayed an inactive client.
 

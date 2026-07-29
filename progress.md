@@ -5,7 +5,7 @@
 **Last Updated:** 2026-07-29
 **Active Feature:** `mvp-003` — Objects
 **Operational deployment:** production deployment and GitHub → Vercel automation verified on 2026-07-29.
-**Status:** `mvp-001` — Projects and `mvp-002` — Clients are complete. `mvp-003` — Objects is active.
+**Status:** `mvp-001` — Projects, `mvp-002` — Clients, and `mvp-003` — Objects are complete. `mvp-004` — Documents is active.
 
 ## What's Done
 
@@ -33,6 +33,8 @@
   - Activate only `mvp-001` — Projects when implementation is requested.
 
 ## Latest Verification
+
+- [x] 2026-07-29: Production acceptance for `mvp-003` passed: created Object ID 5, updated its name, then archived it; final detail view showed Archived.
 
 - [x] 2026-07-29: Production acceptance for `mvp-002` passed: created Client ID 5, updated its legal name, then archived it; final detail view showed an inactive client.
 

@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "mvp-003",
+  "active_feature_id": "mvp-004",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -49,7 +49,8 @@
       "name": "Objects",
       "description": "Deliver the MVP object-management workflow using existing data structures and functions.",
       "dependencies": ["mvp-002"],
-      "status": "in-progress",
+      "status": "complete",
+      "completion_evidence": "2026-07-29: Authenticated production acceptance passed. Created Object ID 5, updated its name, then archived it; final detail view displayed Archived.",
       "latest_verification": "2026-07-29: Implemented Objects registry, detail, protected create/edit/archive UI, and client linkage. User approved is_active archive field and guarded Objects RPCs; anon has no EXECUTE and authenticated does. Typecheck passed; production acceptance pending.",
       "acceptance_criteria": ["Agreed object workflow is implemented.", "Links to Clients and Projects are verified.", "No unapproved schema change is made."],
       "evidence": "Third implementation module by user-approved order."
@@ -59,7 +60,7 @@
       "name": "Documents",
       "description": "Deliver the MVP document workflow using existing data structures and functions.",
       "dependencies": ["mvp-003"],
-      "status": "planned",
+      "status": "in-progress",
       "acceptance_criteria": ["Agreed document workflow is implemented.", "Relevant entity links are verified.", "No unapproved schema or storage-policy change is made."],
       "evidence": "Fourth implementation module by user-approved order."
     },
