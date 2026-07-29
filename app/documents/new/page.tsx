@@ -1,0 +1,1 @@
+import {DocumentForm} from "@/components/document-form";import {getProjects} from "@/lib/data/projects";export default async function Page(){const projects=await getProjects();return <DocumentForm projects={projects.map(p=>({id:p.id,title:p.title}))}/>}
