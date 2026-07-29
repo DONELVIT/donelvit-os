@@ -1,0 +1,1 @@
+export default function Page(){return <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-panel"><p className="text-sm font-medium text-red-700">DONELVIT OS</p><h1 className="mt-2 text-3xl font-bold">Клиенты</h1><p className="mt-3 text-slate-500">Реестр клиентов будет подключён после модуля Projects CRUD.</p></div>}

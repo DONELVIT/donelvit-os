@@ -1,0 +1,1 @@
+export type ProjectListItem={id:number;project_number:string|null;title:string;stage:string;status:string;due_date:string|null;amount:number|null;currency:string;responsible_person:string|null;client_name:string;object_name:string|null};
