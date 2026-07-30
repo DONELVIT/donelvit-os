@@ -6,6 +6,8 @@
 
 - Update 2026-07-30: `mvp-005` Contracts is complete. Production contract ID 1 was created, edited, and archived; the detail page displays `1000 MDL` and the linked-documents section. `mvp-006` Expert Review is the active feature; inspect its existing schema and routes before proposing any mutation model.
 
+- Update 2026-07-30: `mvp-006` Expert Review is complete. Added the approved RLS-enabled `donelvit.expert_reviews` table and guarded create/update RPCs; production review ID 1 was created with project/document links then moved to `resolved` with a resolution. `mvp-007` DOCX templates is active; request explicit required template files and source-field mapping before implementation.
+
 - Update 2026-07-30: `mvp-004` Documents is complete. Production registry confirmed document ID 1 has final status `archived`. `mvp-005` Contracts is now active; its mutation model requires explicit user approval before implementation.
 
 - Goal: deliver DONELVIT OS MVP in the approved module order.

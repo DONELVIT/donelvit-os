@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "mvp-006",
+  "active_feature_id": "mvp-007",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -78,18 +78,18 @@
       "name": "Expert Review",
       "description": "Deliver the MVP expert-review workflow using existing data structures and functions.",
       "dependencies": ["mvp-005"],
-      "status": "in-progress",
+      "status": "complete",
       "acceptance_criteria": ["Agreed expert-review workflow is implemented.", "Related project/document behaviour is verified.", "No unapproved schema change is made."],
-      "evidence": "Activated on 2026-07-30 after Contracts production acceptance. Scope and mutation model require review before implementation."
+      "evidence": "2026-07-30: User approved a minimal expert-review data model. Added RLS-enabled donelvit.expert_reviews with project/document links, severity, status, normative reference and resolution; direct writes are denied and guarded RPCs require auth.uid(). Production acceptance created review ID 1 linked to a project and document, then updated it to resolved with a resolution. Registry, detail and edit UI were verified. npm run typecheck passed; local build remains blocked by documented Windows sandbox spawn EPERM."
     },
     {
       "id": "mvp-007",
       "name": "DOCX templates",
       "description": "Deliver approved DOCX templates and their generation/filling workflow.",
       "dependencies": ["mvp-006"],
-      "status": "planned",
+      "status": "in-progress",
       "acceptance_criteria": ["Required templates and source data are explicit.", "Generated DOCX files are rendered and visually checked.", "Storage and access use approved existing platform capabilities."],
-      "evidence": "Seventh implementation module by user-approved order."
+      "evidence": "Activated on 2026-07-30 after Expert Review production acceptance. Required DOCX templates and their source fields must be made explicit before implementation."
     },
     {
       "id": "mvp-008",
