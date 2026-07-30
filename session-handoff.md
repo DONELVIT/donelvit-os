@@ -109,3 +109,8 @@
 - Dependencies installed with user approval: `docxtemplater@3.67.5`, `pizzip@3.2.0`. `npm run typecheck` passed. Local `npm run build` halted only at the known Windows sandbox `spawn EPERM`. Commit `2ec9111` was pushed to `main`; Vercel deployment `dpl_637LxCL7zqg5y6xCuPsqsKG7kCcM` is READY and its error-only build log reports only completion. `/contracts/1` in production visibly shows the object picker and `Сформировать DOCX` button.
 - Drive folder supplied by user: `https://drive.google.com/drive/folders/1B4McqCVevbMxgJKAbY7UgtxxMmx4GAcF`; connector check succeeded and returned an empty folder. Do not place a key in source or `.env.local`. Next required user action is provide the service-account email/key and share that Drive folder with the email; set JSON in Vercel as `GOOGLE_SERVICE_ACCOUNT_JSON` and folder id as `GOOGLE_DRIVE_CONTRACTS_FOLDER_ID`. Afterwards push, wait for the Vercel build, then generate a real contract and verify the file, Drive link, and related Documents record.
 - Visual QA of generated DOCX is still required. LibreOffice/`soffice` is unavailable in the local environment, so the template visual render could not be produced locally.
+
+## 2026-07-30 Authentication and Roles Handoff
+
+- The user explicitly deferred the outstanding Drive configuration and asked to continue. `mvp-007` is recorded complete with the listed operational deferrals; active feature is now `mvp-008` only.
+- Before modifying authentication, roles, RLS, or authorization, inspect the existing Supabase Auth and current grants, then obtain explicit agreement on the role matrix. Existing invitation-only employee access must remain unchanged until that decision.
