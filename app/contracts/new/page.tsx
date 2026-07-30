@@ -1,0 +1,1 @@
+import {ContractForm} from "@/components/contract-form";import {getClients} from "@/lib/data/clients";export default async function Page(){const clients=await getClients();return <ContractForm clients={clients.map(x=>({id:x.id,legal_name:x.legal_name}))}/>}

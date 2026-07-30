@@ -8,6 +8,7 @@ const nav = [
   {href: "/clients", label: "Клиенты", icon: Users},
   {href: "/objects", label: "Объекты", icon: Building2},
   {href: "/documents", label: "Документы", icon: FileText},
+  {href: "/contracts", label: "Договоры", icon: FileText},
   {href: "/normatives", label: "Нормативы", icon: LibraryBig},
 ];
 
