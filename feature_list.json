@@ -98,7 +98,7 @@
       "dependencies": ["mvp-007"],
       "status": "in-progress",
       "acceptance_criteria": ["Login flows and roles are agreed before implementation.", "Authorization is verified for each role.", "No service-role secret is exposed; any RLS/auth change is explicitly approved."],
-      "evidence": "Activated on 2026-07-30 after the user explicitly closed mvp-007 with deferred Drive configuration. 2026-07-30 audit: Auth has one invited, email-confirmed user and no application role in app_metadata; all donelvit registry tables retain anon/authenticated SELECT through prototype_read policies, while mutations use guarded RPCs. Security Advisor reports only the existing mutable search_path warning on donelvit.set_updated_at and leaked-password protection disabled. Current role model must be explicitly agreed before any Auth, RLS, or authorization change."
+      "evidence": "Activated on 2026-07-30 after the user explicitly closed mvp-007 with deferred Drive configuration. User approved roles admin/engineer/viewer. Added RLS-protected donelvit.user_roles, default viewer assignment trigger for new Auth users, guarded role lookup/management RPCs, and editor-role triggers on all mutable MVP registries. The existing employee is bootstrapped as admin. Verified: anon cannot execute role checks, authenticated can; admin can write, engineer can edit but is not admin, and viewer cannot edit. Settings page now lets admins change invited employees' roles. Security Advisor reports only the existing mutable search_path warning on donelvit.set_updated_at and leaked-password protection disabled. npm run typecheck passed; production UI verification is pending deployment."
     },
     {
       "id": "mvp-009",
