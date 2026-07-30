@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Last Updated:** 2026-07-29
+**Last Updated:** 2026-07-30
 **Active Feature:** `mvp-004` — Documents
 **Operational deployment:** production deployment and GitHub → Vercel automation verified on 2026-07-29.
 **Status:** `mvp-001` — Projects, `mvp-002` — Clients, and `mvp-003` — Objects are complete. `mvp-004` — Documents is active.
@@ -92,6 +92,7 @@
 - [x] `npm run typecheck` passed. `npm run build` reached Next.js compilation then failed only with the known Windows sandbox `spawn EPERM`.
 - [x] Production manual verification: created document ID 1, opened its detail view, and changed the title to `E2E Document acceptance 2026-07-30 — updated`.
 - [ ] Archive confirmation was opened, but the browser driver timed out before accepting it. Verify the record's `archived` status before closing `mvp-004`.
+- [x] Manual production verification subsequently confirmed document ID 1 has final status `archived`; `mvp-004` is complete. The next active feature is `mvp-005` — Contracts.
 
 ## Notes for Next Session
 

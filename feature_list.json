@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "mvp-004",
+  "active_feature_id": "mvp-005",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -60,18 +60,18 @@
       "name": "Documents",
       "description": "Deliver the MVP document workflow using existing data structures and functions.",
       "dependencies": ["mvp-003"],
-      "status": "in-progress",
+      "status": "complete",
       "acceptance_criteria": ["Agreed document workflow is implemented.", "Relevant entity links are verified.", "No unapproved schema or storage-policy change is made."],
-      "evidence": "2026-07-30: implemented authenticated Documents registry, creation, detail, editing, and archive action backed by approved guarded RPCs. Typecheck passed; production create, detail, and edit checks passed. Archive confirmation was reached but browser automation timed out before confirmation; final archive check remains."
+      "evidence": "2026-07-30: authenticated Documents registry, creation, detail, editing, and archive action implemented using user-approved guarded RPCs. Typecheck passed. Production acceptance created document ID 1, updated its title, and confirmed final status `archived`; storage policy was not changed."
     },
     {
       "id": "mvp-005",
       "name": "Contracts",
       "description": "Deliver the MVP contracts workflow using existing data structures and functions.",
       "dependencies": ["mvp-004"],
-      "status": "planned",
+      "status": "in-progress",
       "acceptance_criteria": ["Agreed contract workflow is implemented.", "Related entities and document references are verified.", "No unapproved schema change is made."],
-      "evidence": "Fifth implementation module by user-approved order."
+      "evidence": "Active after Documents acceptance on 2026-07-30. Contract mutation model requires explicit user approval before implementation."
     },
     {
       "id": "mvp-006",

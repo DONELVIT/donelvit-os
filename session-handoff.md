@@ -2,6 +2,8 @@
 
 ## Current Objective
 
+- Update 2026-07-30: `mvp-004` Documents is complete. Production registry confirmed document ID 1 has final status `archived`. `mvp-005` Contracts is now active; its mutation model requires explicit user approval before implementation.
+
 - Goal: deliver DONELVIT OS MVP in the approved module order.
 - Current status: `mvp-001` — Projects, `mvp-002` — Clients, and `mvp-003` — Objects are complete. `mvp-004` — Documents is active.
 - Branch / commit: local `main` is connected to `origin` (`DONELVIT/donelvit-os`); pushes to `main` trigger Vercel production deployments.
