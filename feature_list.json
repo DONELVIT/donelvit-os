@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "mvp-007",
+  "active_feature_id": null,
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -89,7 +89,7 @@
       "dependencies": ["mvp-006"],
       "status": "complete",
       "acceptance_criteria": ["Required templates and source data are explicit.", "Generated DOCX files are rendered and visually checked.", "Storage and access use approved existing platform capabilities."],
-      "evidence": "2026-07-30: Closed by explicit user decision with deferred operational configuration. The reference template Contract.docx was copied unchanged into assets/docx-templates/Contract.docx (SHA-256 1C00BCE1C3A89A4FB96D38CDCA1ED92A8B6A7D6FEA94D144912EB6D8AC08E127). Its 18 placeholders were mapped to existing contract, client-banking, and user-selected object data. Added the contract-detail object picker, DOCX renderer, authenticated generation endpoint, and Google Drive service-account uploader; the existing create_document RPC already accepts p_contract_id, so no schema/RLS change was needed. npm run typecheck passed; local npm run build remains blocked by the known Windows sandbox spawn EPERM. Git commit 2ec9111 deployed to Vercel production as dpl_637LxCL7zqg5y6xCuPsqsKG7kCcM (READY); the contract detail visibly contains the object picker and Generate DOCX control. Deferred items: configuring GOOGLE_SERVICE_ACCOUNT_JSON and GOOGLE_DRIVE_CONTRACTS_FOLDER_ID in Vercel, sharing the Drive folder with the service-account email, end-to-end upload validation, and visual DOCX rendering (LibreOffice/soffice is unavailable locally)."
+      "evidence": "2026-07-30: Reference template Contract.docx was copied unchanged into assets/docx-templates/Contract.docx (SHA-256 1C00BCE1C3A89A4FB96D38CDCA1ED92A8B6A7D6FEA94D144912EB6D8AC08E127). Its 18 placeholders were mapped to existing contract, client-banking, and user-selected object data. Added the contract-detail object picker, DOCX renderer, authenticated generation endpoint, and Google Drive service-account uploader; the existing create_document RPC already accepts p_contract_id, so no schema/RLS change was needed. The production settings GOOGLE_SERVICE_ACCOUNT_JSON (sensitive) and GOOGLE_DRIVE_CONTRACTS_FOLDER_ID were added on 2026-07-30 and deployment dpl_AUubdbPmhhCDvPceGpzEG8Kw5Pa6 reached READY. Live generation exposed a template delimiter mismatch, fixed in source by configuring the template's {{...}} delimiters; npm run typecheck passed and local build remains blocked only by sandbox spawn EPERM. Remaining operational work: grant the service account Editor access to the Drive folder (the signed-in account cannot manage its sharing), re-run live upload validation, and visually inspect the generated DOCX (LibreOffice/soffice is unavailable locally)."
     },
     {
       "id": "mvp-008",

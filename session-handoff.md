@@ -2,6 +2,8 @@
 
 ## Current Objective
 
+- Update 2026-07-30: Google Drive production variables are configured in Vercel and a settings redeploy `dpl_AUubdbPmhhCDvPceGpzEG8Kw5Pa6` is READY. First live generation found a Contract.docx delimiter mismatch; `lib/contracts/contract-docx.ts` now uses `{{` / `}}` delimiters and needs a pushed production re-test. The signed-in Google account cannot manage access to the approved Drive folder; its owner must share the folder with the service account as Editor before the upload can complete.
+
 - Update 2026-07-30: Client banking requisites maintenance is deployed and production-verified. `components/client-form.tsx` collects IBAN, Banca, BIC; new authenticated-only `create_client`/`update_client` RPC overloads persist those fields without a table or RLS change. `npm run typecheck` passed; E2E Banking Client 20260730 was created in production and its detail page displayed all three saved values. Contract currency now stores three characters and production detail shows `1000 MDL`; final Contract edit/archive and document-reference verification remain pending.
 
 - Update 2026-07-30: `mvp-005` Contracts is complete. Production contract ID 1 was created, edited, and archived; the detail page displays `1000 MDL` and the linked-documents section. `mvp-006` Expert Review is the active feature; inspect its existing schema and routes before proposing any mutation model.

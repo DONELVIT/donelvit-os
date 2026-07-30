@@ -40,6 +40,8 @@
 
 ## Latest Verification
 
+- [ ] 2026-07-30: Drive integration configuration resumed. Added the sensitive production `GOOGLE_SERVICE_ACCOUNT_JSON` and production `GOOGLE_DRIVE_CONTRACTS_FOLDER_ID` in Vercel, then redeployed as `dpl_AUubdbPmhhCDvPceGpzEG8Kw5Pa6` (READY). The signed-in Google account can open the target folder but its sharing controls are disabled, so only the folder owner can grant the service account Editor access. A live generation attempt correctly reached the API but exposed a `{{...}}` delimiter mismatch in Contract.docx; source now configures these delimiters. `npm run typecheck` passed; local build stopped only at the known sandbox `spawn EPERM`. Re-deploy and re-test after the source fix.
+
 - [ ] 2026-07-30: User explicitly deferred the remaining Google Drive configuration, real upload verification, and visual DOCX rendering. `mvp-007` is closed with those deferred items recorded; `mvp-008` Authentication and roles is now the sole active feature. No access rule has changed.
 
 - [x] 2026-07-30: `mvp-008` read-only authorization audit completed. Supabase has one invited, confirmed employee and no application role in `app_metadata`; all registry tables are readable by both `anon` and `authenticated` through `prototype_read` policies. No authorization settings were changed. Security Advisor’s only findings remain mutable search path in `donelvit.set_updated_at` and disabled leaked-password protection.
