@@ -105,9 +105,9 @@
       "name": "Final testing and launch",
       "description": "Perform regression verification, final user acceptance, launch preparation, and documented handoff.",
       "dependencies": ["mvp-008"],
-      "status": "in-progress",
+      "status": "complete",
       "acceptance_criteria": ["All MVP criteria have evidence.", "Critical workflows have repeatable regression coverage and manual acceptance evidence.", "Launch destination, rollback plan, and GitHub/deployment access are confirmed."],
-      "evidence": "Activated on 2026-07-30 after Authentication and roles acceptance. Perform final regression review, document deferred DOCX Drive configuration, and prepare handoff without changing product scope."
+      "evidence": "2026-07-30: Completed launch-readiness review. Every completed MVP workflow has recorded production acceptance evidence; production deployment dpl_BPXH523BYh3BCV95BWMtWWihGTdJ is READY and Vercel reported no runtime errors in the previous hour. GitHub main to Vercel is the confirmed rollout path and promotion/revert is the rollback path. docs/LAUNCH-HANDOFF.md records verified workflows, baseline, and residual risk. User-approved deferred work remains: Google Drive service-account configuration/live upload validation and visual DOCX rendering; unrelated Supabase warnings remain leaked-password protection disabled and donelvit.set_updated_at mutable search_path."
     }
   ]
 }
