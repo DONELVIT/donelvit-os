@@ -2,6 +2,8 @@
 
 ## Current Objective
 
+- Update 2026-07-30: Client banking requisites maintenance is ready for Git/Vercel deployment. `components/client-form.tsx` collects IBAN, Banca, BIC; new authenticated-only `create_client`/`update_client` RPC overloads persist those fields without a table or RLS change. `npm run typecheck` passed. Contract currency now stores three characters and production detail shows `1000 MDL`; final Contract edit/archive and document-reference verification remain pending.
+
 - Update 2026-07-30: `mvp-004` Documents is complete. Production registry confirmed document ID 1 has final status `archived`. `mvp-005` Contracts is now active; its mutation model requires explicit user approval before implementation.
 
 - Goal: deliver DONELVIT OS MVP in the approved module order.

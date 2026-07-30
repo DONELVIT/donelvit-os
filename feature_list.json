@@ -42,7 +42,7 @@
       "completion_evidence": "2026-07-29: Authenticated production acceptance passed. Created client ID 5, updated its legal name, then archived it; final detail view displayed inactive client.",
       "latest_verification": "2026-07-29: User approved authenticated Client mutations. Added create_client, update_client, and archive_client RPCs with auth.uid() guards; anon EXECUTE is false and authenticated EXECUTE is true for all three. Added protected Client create/edit/archive routes. Typecheck passed; local next build remains blocked by sandbox spawn EPERM. Production mutation acceptance remains pending.",
       "acceptance_criteria": ["Agreed client workflow is implemented.", "Integration with Projects is verified.", "No unapproved schema change is made."],
-      "evidence": "Second implementation module by user-approved order."
+      "evidence": "Second implementation module by user-approved order. 2026-07-30 maintenance: user-approved banking requisites were restored in the Client form and authenticated-only create_client/update_client RPC overloads; IBAN, Banca, and BIC now persist without a table or RLS change. npm run typecheck passed; production UI verification pending deployment."
     },
     {
       "id": "mvp-003",
@@ -71,7 +71,7 @@
       "dependencies": ["mvp-004"],
       "status": "in-progress",
       "acceptance_criteria": ["Agreed contract workflow is implemented.", "Related entities and document references are verified.", "No unapproved schema change is made."],
-      "evidence": "Active after Documents acceptance on 2026-07-30. Contract mutation model requires explicit user approval before implementation."
+      "evidence": "Active after Documents acceptance on 2026-07-30. User approved guarded Contract mutation RPCs; contracts registry, create/edit/detail UI, navigation, and archive action are implemented. Currency storage was corrected from char(1) to char(3) after explicit approval; production detail check shows 1000 MDL. Final edit/archive acceptance and document-reference verification remain pending."
     },
     {
       "id": "mvp-006",

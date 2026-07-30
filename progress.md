@@ -2,6 +2,8 @@
 
 ## Current State
 
+**Current update (2026-07-30):** `mvp-005` Contracts is active. Client banking requisites maintenance added IBAN, Banca, and BIC to the Client form and new guarded RPC overloads to persist them; table schema and RLS were unchanged. `npm run typecheck` passed; production UI verification follows deployment.
+
 **Last Updated:** 2026-07-30
 **Active Feature:** `mvp-004` — Documents
 **Operational deployment:** production deployment and GitHub → Vercel automation verified on 2026-07-29.
@@ -33,6 +35,8 @@
   - Activate only `mvp-001` — Projects when implementation is requested.
 
 ## Latest Verification
+
+- [x] 2026-07-30: Contract currency storage was approvedly widened from `char(1)` to `char(3)`; the production contract detail renders `1000 MDL`.
 
 - [x] 2026-07-29: Production acceptance for `mvp-003` passed: created Object ID 5, updated its name, then archived it; final detail view showed Archived.
 
