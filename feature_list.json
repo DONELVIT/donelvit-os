@@ -96,18 +96,18 @@
       "name": "Authentication and roles",
       "description": "Implement the agreed authentication and role model with explicit access rules and security verification.",
       "dependencies": ["mvp-007"],
-      "status": "in-progress",
+      "status": "complete",
       "acceptance_criteria": ["Login flows and roles are agreed before implementation.", "Authorization is verified for each role.", "No service-role secret is exposed; any RLS/auth change is explicitly approved."],
-      "evidence": "Activated on 2026-07-30 after the user explicitly closed mvp-007 with deferred Drive configuration. User approved roles admin/engineer/viewer. Added RLS-protected donelvit.user_roles, default viewer assignment trigger for new Auth users, guarded role lookup/management RPCs, and editor-role triggers on all mutable MVP registries. The existing employee is bootstrapped as admin. Verified: anon cannot execute role checks, authenticated can; admin can write, engineer can edit but is not admin, and viewer cannot edit. Settings page now lets admins change invited employees' roles. Security Advisor reports only the existing mutable search_path warning on donelvit.set_updated_at and leaked-password protection disabled. npm run typecheck passed; production UI verification is pending deployment."
+      "evidence": "2026-07-30: Completed. User approved roles admin/engineer/viewer. Added RLS-protected donelvit.user_roles, default viewer assignment trigger for new Auth users, guarded role lookup/management RPCs, and editor-role triggers on all mutable MVP registries. The existing employee is bootstrapped as admin. SQL verification: anon cannot execute role checks, authenticated can; admin can write, engineer can edit but is not admin, and viewer cannot edit. Production commit d081b76 deployed as dpl_BPXH523BYh3BCV95BWMtWWihGTdJ (READY); the authenticated Settings page displayed the Administrator role and role-management table. Security Advisor reports only the pre-existing mutable search_path warning on donelvit.set_updated_at and leaked-password protection disabled. npm run typecheck passed; local build remains blocked by known Windows sandbox spawn EPERM."
     },
     {
       "id": "mvp-009",
       "name": "Final testing and launch",
       "description": "Perform regression verification, final user acceptance, launch preparation, and documented handoff.",
       "dependencies": ["mvp-008"],
-      "status": "planned",
+      "status": "in-progress",
       "acceptance_criteria": ["All MVP criteria have evidence.", "Critical workflows have repeatable regression coverage and manual acceptance evidence.", "Launch destination, rollback plan, and GitHub/deployment access are confirmed."],
-      "evidence": "Ninth and final MVP phase by user-approved order."
+      "evidence": "Activated on 2026-07-30 after Authentication and roles acceptance. Perform final regression review, document deferred DOCX Drive configuration, and prepare handoff without changing product scope."
     }
   ]
 }
