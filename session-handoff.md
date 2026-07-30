@@ -114,3 +114,4 @@
 
 - The user explicitly deferred the outstanding Drive configuration and asked to continue. `mvp-007` is recorded complete with the listed operational deferrals; active feature is now `mvp-008` only.
 - Before modifying authentication, roles, RLS, or authorization, inspect the existing Supabase Auth and current grants, then obtain explicit agreement on the role matrix. Existing invitation-only employee access must remain unchanged until that decision.
+- Read-only audit result: one invited confirmed user has only provider metadata (no app role); all donelvit registries have anon/authenticated SELECT policies. Security Advisor still flags only `set_updated_at` mutable search_path and disabled leaked-password protection. No access setting was changed.
