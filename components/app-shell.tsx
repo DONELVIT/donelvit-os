@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {Building2, FileText, FolderKanban, Gauge, LibraryBig, Settings, Users} from "lucide-react";
+import {Building2, FileText, FolderKanban, Gauge, LibraryBig, Settings, ShieldCheck, Users} from "lucide-react";
 import {AuthStatusControl} from "@/components/auth-ui";
 
 const nav = [
@@ -10,6 +10,7 @@ const nav = [
   {href: "/documents", label: "Документы", icon: FileText},
   {href: "/contracts", label: "Договоры", icon: FileText},
   {href: "/normatives", label: "Нормативы", icon: LibraryBig},
+  {href: "/expert-reviews", label: "Экспертиза", icon: ShieldCheck},
 ];
 
 export function AppShell({children}: {children: React.ReactNode}) {
