@@ -4,6 +4,8 @@
 
 **Current update (2026-07-30):** `mvp-005` Contracts is active. Client banking requisites maintenance added IBAN, Banca, and BIC to the Client form and new guarded RPC overloads to persist them; table schema and RLS were unchanged. `npm run typecheck` passed; production create acceptance confirmed all three saved values on the client detail page.
 
+**Current update (2026-07-30):** `mvp-005` Contracts is complete; `mvp-006` Expert Review is now active. Contracts production acceptance created, edited, and archived contract ID 1, and its detail page verified the related-documents section.
+
 **Last Updated:** 2026-07-30
 **Active Feature:** `mvp-004` — Documents
 **Operational deployment:** production deployment and GitHub → Vercel automation verified on 2026-07-29.
@@ -35,6 +37,8 @@
   - Activate only `mvp-001` — Projects when implementation is requested.
 
 ## Latest Verification
+
+- [x] 2026-07-30: Contracts production acceptance passed: contract ID 1 was created, edited (service `E2E acceptance updated`, revision `rev-2`), then archived. Registry showed `archived`; detail showed `1000 MDL` and the related-documents section. `npm run typecheck` passed; local `npm run build` stopped at the known Windows sandbox `spawn EPERM` after starting the optimized build.
 
 - [x] 2026-07-30: Contract currency storage was approvedly widened from `char(1)` to `char(3)`; the production contract detail renders `1000 MDL`.
 

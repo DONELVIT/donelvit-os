@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "mvp-005",
+  "active_feature_id": "mvp-006",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -69,18 +69,18 @@
       "name": "Contracts",
       "description": "Deliver the MVP contracts workflow using existing data structures and functions.",
       "dependencies": ["mvp-004"],
-      "status": "in-progress",
+      "status": "complete",
       "acceptance_criteria": ["Agreed contract workflow is implemented.", "Related entities and document references are verified.", "No unapproved schema change is made."],
-      "evidence": "Active after Documents acceptance on 2026-07-30. User approved guarded Contract mutation RPCs; contracts registry, create/edit/detail UI, navigation, and archive action are implemented. Currency storage was corrected from char(1) to char(3) after explicit approval; production detail check shows 1000 MDL. Final edit/archive acceptance and document-reference verification remain pending."
+      "evidence": "2026-07-30: User approved guarded Contract mutation RPCs; contracts registry, create/edit/detail UI, navigation, and archive action were implemented. Currency storage was corrected from char(1) to char(3) after explicit approval; production detail check showed 1000 MDL. Production acceptance created contract ID 1, updated service to E2E acceptance updated and revision to rev-2, then archived it; registry displayed status archived. Contract detail presents the related-documents section and correctly showed no linked documents. npm run typecheck passed; local build remains blocked by the documented Windows sandbox spawn EPERM." 
     },
     {
       "id": "mvp-006",
       "name": "Expert Review",
       "description": "Deliver the MVP expert-review workflow using existing data structures and functions.",
       "dependencies": ["mvp-005"],
-      "status": "planned",
+      "status": "in-progress",
       "acceptance_criteria": ["Agreed expert-review workflow is implemented.", "Related project/document behaviour is verified.", "No unapproved schema change is made."],
-      "evidence": "Sixth implementation module by user-approved order."
+      "evidence": "Activated on 2026-07-30 after Contracts production acceptance. Scope and mutation model require review before implementation."
     },
     {
       "id": "mvp-007",
