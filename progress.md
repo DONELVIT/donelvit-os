@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Current update (2026-07-30):** `mvp-005` Contracts is active. Client banking requisites maintenance added IBAN, Banca, and BIC to the Client form and new guarded RPC overloads to persist them; table schema and RLS were unchanged. `npm run typecheck` passed; production UI verification follows deployment.
+**Current update (2026-07-30):** `mvp-005` Contracts is active. Client banking requisites maintenance added IBAN, Banca, and BIC to the Client form and new guarded RPC overloads to persist them; table schema and RLS were unchanged. `npm run typecheck` passed; production create acceptance confirmed all three saved values on the client detail page.
 
 **Last Updated:** 2026-07-30
 **Active Feature:** `mvp-004` — Documents
