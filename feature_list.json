@@ -62,7 +62,7 @@
       "dependencies": ["mvp-003"],
       "status": "in-progress",
       "acceptance_criteria": ["Agreed document workflow is implemented.", "Relevant entity links are verified.", "No unapproved schema or storage-policy change is made."],
-      "evidence": "Fourth implementation module by user-approved order."
+      "evidence": "2026-07-30: implemented authenticated Documents registry, creation, detail, editing, and archive action backed by approved guarded RPCs. Typecheck passed; production create, detail, and edit checks passed. Archive confirmation was reached but browser automation timed out before confirmation; final archive check remains."
     },
     {
       "id": "mvp-005",

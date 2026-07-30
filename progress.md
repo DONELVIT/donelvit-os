@@ -3,7 +3,7 @@
 ## Current State
 
 **Last Updated:** 2026-07-29
-**Active Feature:** `mvp-003` — Objects
+**Active Feature:** `mvp-004` — Documents
 **Operational deployment:** production deployment and GitHub → Vercel automation verified on 2026-07-29.
 **Status:** `mvp-001` — Projects, `mvp-002` — Clients, and `mvp-003` — Objects are complete. `mvp-004` — Documents is active.
 
@@ -84,6 +84,14 @@
 - [x] Supabase Auth logs on 2026-07-29: authenticated `/user` requests from `https://donelvit-os.vercel.app/` returned 200 after the Email provider correction.
 - [x] Vercel production deployment `dpl_5Tauc4mjJM1QKrmECxYw4Lax9hrL` reached `READY` on 2026-07-29. Error-only build logs reported only completion; a production fetch of `/projects` confirmed the corrected employee write-access notice and New Project control.
 - [x] Git commit `8900e39` was pushed to `DONELVIT/donelvit-os` `main` on 2026-07-29. Vercel detected that Git push and completed production deployment `dpl_F7qmh1dRmiaySppYszriviCec5kg` from source `git`; error-only logs show only build completion.
+
+## 2026-07-30 Documents Progress
+
+- [x] Added guarded `create_document`, `update_document`, and `archive_document` RPCs after user approval; storage policy was not changed.
+- [x] Implemented Documents registry, creation, detail, and editing UI; commit `37a2ff1` is pushed to `main`.
+- [x] `npm run typecheck` passed. `npm run build` reached Next.js compilation then failed only with the known Windows sandbox `spawn EPERM`.
+- [x] Production manual verification: created document ID 1, opened its detail view, and changed the title to `E2E Document acceptance 2026-07-30 — updated`.
+- [ ] Archive confirmation was opened, but the browser driver timed out before accepting it. Verify the record's `archived` status before closing `mvp-004`.
 
 ## Notes for Next Session
 

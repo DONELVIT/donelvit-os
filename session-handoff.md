@@ -82,6 +82,13 @@
 2. Continue exactly one active feature: `mvp-002` — Clients.
 3. Run `./init.ps1` on Windows or `./init.sh` in a POSIX shell before editing.
 
+## 2026-07-30 Documents Handoff
+
+- Documents registry, create, detail, and edit routes are implemented and pushed in `37a2ff1`.
+- Production acceptance created document ID 1 and updated its title successfully. The archive button opened its confirmation, but browser control timed out before confirmation; it still shows `draft`.
+- `npm run typecheck` passed. `npm run build` failed only at the known Windows sandbox `spawn EPERM`.
+- Next step: archive document ID 1 from `https://donelvit-os.vercel.app/documents/1/edit`, verify its detail status, then mark `mvp-004` complete and begin `mvp-005` only after approval for contract mutations.
+
 ## Recommended Next Step
 
 - Obtain explicit approval for the client mutation access model before adding protected create/edit/archive capabilities; no existing client CRUD RPC is available.
