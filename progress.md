@@ -40,6 +40,8 @@
 
 ## Latest Verification
 
+- [ ] 2026-07-30: Started `maint-001` Project system assignment after explicit user approval. Existing `system_types` and `project_systems` model is used without a new table. Project create/edit now loads active systems and passes `p_system_type_ids`; new guarded `create_project`/`update_project` overloads validate active IDs and atomically save links while direct browser INSERT/DELETE stays denied. `npm run typecheck` passed. `./init.ps1 -SkipInstall` and local `npm run build` stopped only at the known Windows sandbox `spawn EPERM`. The Supabase connector rejected the post-change verification query due to its usage limit; Vercel and manual production verification are pending.
+
 - [ ] 2026-07-30: Drive integration configuration resumed. Added the sensitive production `GOOGLE_SERVICE_ACCOUNT_JSON` and production `GOOGLE_DRIVE_CONTRACTS_FOLDER_ID` in Vercel, then redeployed as `dpl_AUubdbPmhhCDvPceGpzEG8Kw5Pa6` (READY). The signed-in Google account can open the target folder but its sharing controls are disabled, so only the folder owner can grant the service account Editor access. A live generation attempt correctly reached the API but exposed a `{{...}}` delimiter mismatch in Contract.docx; source now configures these delimiters. `npm run typecheck` passed; local build stopped only at the known sandbox `spawn EPERM`. Re-deploy and re-test after the source fix.
 
 - [ ] 2026-07-30: User explicitly deferred the remaining Google Drive configuration, real upload verification, and visual DOCX rendering. `mvp-007` is closed with those deferred items recorded; `mvp-008` Authentication and roles is now the sole active feature. No access rule has changed.

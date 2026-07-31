@@ -9,7 +9,7 @@ export default async function EditProjectPage({params}: {params: Promise<{id: st
   const {id} = await params;
   const projectId = Number(id);
   if (!Number.isInteger(projectId) || projectId <= 0) notFound();
-  const [project, options] = await Promise.all([getProject(projectId), getProjectOptions()]);
+  const [project, options] = await Promise.all([getProject(projectId), getProjectOptions(projectId)]);
   if (!project) notFound();
   return <ProjectWriteGate nextPath={`/projects/${project.id}/edit`}><div className="mx-auto max-w-5xl space-y-6"><header><p className="text-sm font-semibold text-red-700">{project.project_number}</p><h1 className="mt-1 text-3xl font-bold">Редактирование проекта</h1></header><ProjectForm mode="edit" project={project} {...options}/></div></ProjectWriteGate>;
 }

@@ -1,6 +1,6 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { demoProjects } from "@/lib/demo-data";
-import type { ProjectDetails, ProjectDocument, ProjectListItem, ProjectSystem, SelectOption } from "@/lib/types";
+import type { ProjectDetails, ProjectDocument, ProjectListItem, ProjectSystem, SelectOption, SystemTypeOption } from "@/lib/types";
 
 const projectSelect = `
   id, project_number, title, stage, status, start_date, due_date, amount, currency,
@@ -46,16 +46,19 @@ export async function getProject(id:number):Promise<ProjectDetails|null>{
  const {data,error}=await s.from("projects").select(projectSelect).eq("id",id).maybeSingle();
  if(error) throw new Error(error.message); return data?mapProject(data):null;
 }
-export async function getProjectOptions(){
- if (!hasPublicSupabaseConfig()) return {clients:[] as SelectOption[],objects:[] as SelectOption[],types:[] as SelectOption[]};
+export async function getProjectOptions(projectId?:number){
+ if (!hasPublicSupabaseConfig()) return {clients:[] as SelectOption[],objects:[] as SelectOption[],types:[] as SelectOption[],systemTypes:[] as SystemTypeOption[]};
  const s=createServerSupabaseClient(); if(!s) throw new Error("Supabase не настроен.");
- const [c,o,t]=await Promise.all([
+ const [c,o,t,st,links]=await Promise.all([
   s.from("clients").select("id, legal_name").eq("is_active",true).order("legal_name"),
   s.from("objects").select("id, name, client_id").order("name"),
-  s.from("project_types").select("id, name").eq("is_active",true).order("id")
+  s.from("project_types").select("id, name").eq("is_active",true).order("id"),
+  s.from("system_types").select("id, code, name").eq("is_active",true).order("code"),
+  projectId ? s.from("project_systems").select("system_type_id").eq("project_id",projectId) : Promise.resolve({data:[],error:null})
  ]);
- const e=c.error??o.error??t.error; if(e) throw new Error(e.message);
- return {clients:(c.data??[]).map((x:any)=>({id:x.id,name:x.legal_name})),objects:(o.data??[]) as SelectOption[],types:(t.data??[]) as SelectOption[]};
+ const e=c.error??o.error??t.error??st.error??links.error; if(e) throw new Error(e.message);
+ const selectedSystemIds=new Set((links.data??[]).map((link:any)=>link.system_type_id));
+ return {clients:(c.data??[]).map((x:any)=>({id:x.id,name:x.legal_name})),objects:(o.data??[]) as SelectOption[],types:(t.data??[]) as SelectOption[],systemTypes:(st.data??[]).map((system:any)=>({...system,selected:selectedSystemIds.has(system.id)})) as SystemTypeOption[]};
 }
 export async function getProjectSystems(projectId:number):Promise<ProjectSystem[]>{
  if (!hasPublicSupabaseConfig()) return [];

@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": null,
+  "active_feature_id": "maint-001",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -108,6 +108,15 @@
       "status": "complete",
       "acceptance_criteria": ["All MVP criteria have evidence.", "Critical workflows have repeatable regression coverage and manual acceptance evidence.", "Launch destination, rollback plan, and GitHub/deployment access are confirmed."],
       "evidence": "2026-07-30: Completed launch-readiness review. Every completed MVP workflow has recorded production acceptance evidence; production deployment dpl_BPXH523BYh3BCV95BWMtWWihGTdJ is READY and Vercel reported no runtime errors in the previous hour. GitHub main to Vercel is the confirmed rollout path and promotion/revert is the rollback path. docs/LAUNCH-HANDOFF.md records verified workflows, baseline, and residual risk. User-approved deferred work remains: Google Drive service-account configuration/live upload validation and visual DOCX rendering; unrelated Supabase warnings remain leaked-password protection disabled and donelvit.set_updated_at mutable search_path."
+    },
+    {
+      "id": "maint-001",
+      "name": "Project system assignment",
+      "description": "Expose the existing project-to-system relationship in the project create and edit workflow.",
+      "dependencies": ["mvp-009"],
+      "status": "in-progress",
+      "acceptance_criteria": ["Active system types can be selected when creating and editing a project.", "Selections persist only through authenticated guarded RPCs.", "Production form and project Systems tab are manually verified."],
+      "evidence": "2026-07-30: User approved the protected RPC/RLS change. UI now loads active system types and adds checkbox selection to the Project form. New authenticated-only create_project/update_project overloads validate active IDs and write the existing project_systems relation without granting browser table writes. npm run typecheck passed; local build remains blocked by sandbox spawn EPERM. Supabase post-change verification was unavailable because the connector reached its usage limit; Vercel deployment and production acceptance remain pending."
     }
   ]
 }

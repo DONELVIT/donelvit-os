@@ -10,6 +10,7 @@ export type ProjectDetails = ProjectListItem & {
   drive_folder_url?:string|null; todoist_url?:string|null;
 };
 export type SelectOption={id:number;name:string;client_id?:number|null};
+export type SystemTypeOption={id:number;code:string;name:string;selected?:boolean};
 export type ProjectSystem={id:number;code:string;name:string;description:string|null;notes:string|null};
 export type ProjectDocument={id:number;document_type:string;document_number:string|null;title:string;status:string;revision:string|null;issued_at:string|null;drive_file_url:string|null};
 export type ClientListItem={id:number;legal_name:string;fiscal_code:string|null;email:string|null;phone:string|null;is_active:boolean;projects_count:number;objects_count:number;contracts_count:number};
