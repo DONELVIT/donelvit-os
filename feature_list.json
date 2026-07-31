@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "maint-001",
+  "active_feature_id": null,
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -114,9 +114,9 @@
       "name": "Project system assignment",
       "description": "Expose the existing project-to-system relationship in the project create and edit workflow.",
       "dependencies": ["mvp-009"],
-      "status": "in-progress",
+      "status": "complete",
       "acceptance_criteria": ["Active system types can be selected when creating and editing a project.", "Selections persist only through authenticated guarded RPCs.", "Production form and project Systems tab are manually verified."],
-      "evidence": "2026-07-30: User approved the protected RPC/RLS change. UI now loads active system types and adds checkbox selection to the Project form. New authenticated-only create_project/update_project overloads validate active IDs and write the existing project_systems relation without granting browser table writes. npm run typecheck passed; local build remains blocked by sandbox spawn EPERM. Supabase post-change verification was unavailable because the connector reached its usage limit; Vercel deployment and production acceptance remain pending."
+      "evidence": "2026-07-30/31: User approved the protected RPC/RLS change. UI loads active system types and adds checkbox selection to the Project form. New authenticated-only create_project/update_project overloads validate active IDs and write the existing project_systems relation without granting browser table writes. npm run typecheck passed; local build remains blocked by sandbox spawn EPERM. Commit ca27534 deployed to production as dpl_FtgXqZWJovQMGdmugRQwMKZkgFzk (READY). Authenticated production acceptance selected CCTV for project ID 1, saved successfully, showed system count 1, and displayed Supraveghere video in /projects/1?tab=systems."
     }
   ]
 }

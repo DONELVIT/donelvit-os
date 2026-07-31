@@ -2,6 +2,8 @@
 
 ## Current Objective
 
+- Update 2026-07-31: `maint-001` Project system assignment is complete. Commit `ca27534` deployed as `dpl_FtgXqZWJovQMGdmugRQwMKZkgFzk` (READY). In an authenticated production check, CCTV was selected for project ID 1, saved, and rendered as Supraveghere video under `/projects/1?tab=systems`; the system counter showed 1. No active feature remains.
+
 - Update 2026-07-30: `maint-001` Project system assignment is active. User authorized protected Supabase RPC changes. UI code adds active-system checkboxes and sends `p_system_type_ids`; overloaded `create_project`/`update_project` validate active types and sync existing `project_systems` links with no direct browser grants. Typecheck passed. Local build remains blocked by sandbox `spawn EPERM`; the Supabase connector hit its usage limit before post-change privilege checks. Push, wait for Vercel, then verify create/edit plus `/projects/[id]?tab=systems` in production.
 
 - Update 2026-07-30: Google Drive production variables are configured in Vercel and a settings redeploy `dpl_AUubdbPmhhCDvPceGpzEG8Kw5Pa6` is READY. First live generation found a Contract.docx delimiter mismatch; `lib/contracts/contract-docx.ts` now uses `{{` / `}}` delimiters and needs a pushed production re-test. The signed-in Google account cannot manage access to the approved Drive folder; its owner must share the folder with the service account as Editor before the upload can complete.
