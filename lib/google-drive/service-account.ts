@@ -41,7 +41,7 @@ async function accessToken(account: ServiceAccount) {
     headers: { "content-type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion }),
   });
-  if (!response.ok) throw new Error("Google Drive не выдал access token.");
+  if (!response.ok) throw new Error(`Google Drive не выдал access token (HTTP ${response.status}).`);
   const data = await response.json() as { access_token?: string };
   if (!data.access_token) throw new Error("Google Drive вернул неполный access token.");
   return data.access_token;
@@ -59,7 +59,7 @@ export async function uploadDocxToDrive({ fileName, bytes, folderId }: { fileNam
     headers: { Authorization: `Bearer ${token}`, "content-type": `multipart/related; boundary=${boundary}` },
     body,
   });
-  if (!response.ok) throw new Error("Не удалось загрузить DOCX в Google Drive.");
+  if (!response.ok) throw new Error(`Не удалось загрузить DOCX в Google Drive (HTTP ${response.status}).`);
   const file = await response.json() as { id?: string; name?: string; webViewLink?: string };
   if (!file.id) throw new Error("Google Drive не вернул идентификатор файла.");
   return { id: file.id, name: file.name ?? fileName, url: file.webViewLink ?? `https://drive.google.com/open?id=${file.id}` };
