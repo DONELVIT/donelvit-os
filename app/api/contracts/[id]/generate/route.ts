@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 import { renderContractDocx } from "@/lib/contracts/contract-docx";
-import { getGoogleServiceAccount, uploadDocxToDrive } from "@/lib/google-drive/service-account";
+import { getGoogleDriveOAuth as getGoogleServiceAccount, uploadDocxToDrive } from "@/lib/google-drive/oauth";
 
 export const runtime = "nodejs";
 

@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": null,
+  "active_feature_id": "mvp-007",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -87,9 +87,9 @@
       "name": "DOCX templates",
       "description": "Deliver approved DOCX templates and their generation/filling workflow.",
       "dependencies": ["mvp-006"],
-      "status": "complete",
+      "status": "in-progress",
       "acceptance_criteria": ["Required templates and source data are explicit.", "Generated DOCX files are rendered and visually checked.", "Storage and access use approved existing platform capabilities."],
-      "evidence": "2026-07-30: Reference template Contract.docx was copied unchanged into assets/docx-templates/Contract.docx (SHA-256 1C00BCE1C3A89A4FB96D38CDCA1ED92A8B6A7D6FEA94D144912EB6D8AC08E127). Its 18 placeholders were mapped to existing contract, client-banking, and user-selected object data. Added the contract-detail object picker, DOCX renderer, authenticated generation endpoint, and Google Drive service-account uploader; the existing create_document RPC already accepts p_contract_id, so no schema/RLS change was needed. The production settings GOOGLE_SERVICE_ACCOUNT_JSON (sensitive) and GOOGLE_DRIVE_CONTRACTS_FOLDER_ID were added on 2026-07-30. Live generation exposed a template delimiter mismatch, fixed in source by configuring the template's {{...}} delimiters. Deployment dpl_2ZGooggdPu82fPAgzxrnBSRcdPGp (commit 07ce429) is READY and a signed-in production run selected the approved object, rendered the DOCX, then received Google Drive HTTP 403 on upload; no related document was created. npm run typecheck passed and local build remains blocked only by sandbox spawn EPERM. Remaining operational work: verify that the exact target folder is shared with service account vercel-drive@contracte-proiectare.iam.gserviceaccount.com as Editor, re-run live upload validation, and visually inspect the generated DOCX (LibreOffice/soffice is unavailable locally)."
+      "evidence": "2026-07-30/31: Reference template Contract.docx was copied unchanged into assets/docx-templates/Contract.docx (SHA-256 1C00BCE1C3A89A4FB96D38CDCA1ED92A8B6A7D6FEA94D144912EB6D8AC08E127). Its 18 placeholders were mapped to existing contract, client-banking, and user-selected object data. The contract-detail object picker, DOCX renderer, authenticated generation endpoint, and automatic document-register save use the existing create_document RPC; no Supabase schema/RLS change was needed. Service-account upload reached Google Drive but returned HTTP 403 after rendering; the user then explicitly approved OAuth for the current My Drive folder. Source now uses server-only OAuth refresh-token credentials and documents the Google/Vercel setup in docs/GOOGLE-DRIVE-OAUTH.md. Remaining operational work: configure the three sensitive OAuth variables in Vercel, run one live upload, and visually inspect the generated DOCX."
     },
     {
       "id": "mvp-008",
