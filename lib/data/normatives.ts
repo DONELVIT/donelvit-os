@@ -1,6 +1,35 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
-export type Normative = { id: number; code: string; title: string; family: string; jurisdiction: string; language: string; status: string; effective_date: string | null; source_name: string; source_url: string; source_published_at: string | null; replaces_code: string | null; metadata: Record<string, string> };
+export type NormativeDriveFile = {
+  provider: "google_drive";
+  file_id: string;
+  url: string;
+  filename: string;
+  mime_type: string;
+  access: "private";
+  uploaded_at: string;
+};
+
+export type Normative = {
+  id: number;
+  code: string;
+  title: string;
+  family: string;
+  jurisdiction: string;
+  language: string;
+  status: string;
+  effective_date: string | null;
+  source_name: string;
+  source_url: string;
+  source_published_at: string | null;
+  replaces_code: string | null;
+  metadata: {
+    title_ru?: string;
+    title_en?: string;
+    drive_files?: NormativeDriveFile[];
+    [key: string]: unknown;
+  };
+};
 
 export async function getNormatives(query = "", family = "") {
   const supabase = createServerSupabaseClient();

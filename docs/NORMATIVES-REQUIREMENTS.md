@@ -29,6 +29,12 @@ EDNC does not provide a verified documented API or CSV export. Its published rul
 
 Linking Expert Reviews to a catalog record should preserve the existing free-text `normative_reference` as a historical snapshot. Adding that relationship, catalogue tables, or role-based catalog writes requires a separately approved Supabase schema/RLS change.
 
+## Approved internal reference copies
+
+On 2026-08-06 the user authorised storing local reference copies in the private Google Drive folder `DONELVIT OS — Normatives`. The catalog preserves `source_url` as the official EDNC link. Exact Drive-file references are stored only in the existing `normatives.metadata.drive_files` JSON field, with file ID, URL, name, MIME type, private-access note and upload time. This change does not alter schema, RLS, grants or the official source.
+
+Only exact code-and-version matches may be associated. The initial mappings are NCM E.03.05:2026 → `NCM-E.03.05-2026-2.pdf` and NCM C.01.08-2025 → `NCM-C.01.08-2025-Blocuri Locative.pdf`. A Drive link does not grant access; the UI must state that access depends on the user's Google Drive permissions.
+
 ## Risks
 
 EN and ISO materials are commonly licensed. Do not copy, publish, OCR, or full-text index them without permission. Version currency, source-link expiry, and jurisdiction must be clear to avoid using an obsolete or inapplicable standard.
