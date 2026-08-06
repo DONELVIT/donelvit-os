@@ -10,6 +10,12 @@ Start with a metadata registry:
 - `/normatives/[id]` — standard metadata, revision/status, source, and an authorised access link.
 - Full standard files remain with their official provider unless written rights explicitly allow storage, distribution, text extraction, and indexing in DONELVIT OS.
 
+## Confirmed candidate source: EDNC Moldova
+
+The user supplied [EDNC](https://ednc.gov.md/), the MIDR Moldova portal for construction normative documents. It provides public catalog/search pages for NCM/CP, rich item metadata, source links and catalog PDFs. Use it for the initial metadata index and source links.
+
+EDNC does not provide a verified documented API or CSV export. Its published rules distinguish unrestricted documents from material requiring registration or purchase. Therefore, do not mirror, OCR, or full-text index PDFs; retrieve metadata from public pages and send the user to the EDNC source link. EN/ISO must remain metadata and authorised-provider links until separate content rights are supplied.
+
 ## Required inputs before implementation
 
 1. Meaning and jurisdiction of **NCM** and **HG**, and the initial document families, versions, and languages.
