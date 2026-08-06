@@ -167,6 +167,11 @@
 - User tested the new flow and received `Mutually exclusive parameters: 'input[0].content[0]'. Ensure you are only providing one of: 'file_id' or 'filename'.` The request sent `filename` alongside a private `file_url`. Official OpenAI Responses file-URL examples use only `{ type: "input_file", file_url }`; `filename` is only used with base64 `file_data`.
 - Commit `b5f660a` removes `filename` from the `file_url` content item. Typecheck and diff check passed; production deployment `dpl_76vNvLesAHcekjNmgR18heVKP8eo` is READY. Ask the user to repeat the same authenticated analysis. The failed request ran the `finally` block, so its temporary Blob was deleted.
 
+## 2026-08-06 Mandatory Verification Norms
+
+- User requires every project verification to use: NCM G.02.01:2017 (electronic communication, automation and signalling systems), NCM C.01.08-2025 (apartment buildings) and NCM E.03.03-2018 (fire signalling and warning installations). Official EDNC audit confirms each record is in force; NCM C.01.08-2025 took effect 19 December 2025 and replaces the 2016 edition.
+- Commit `821aece` adds official EDNC source links to the Verification workspace and injects the three records into the AI instruction as a priority mandatory normative basis. The instruction avoids a false nonconformity by requiring NCM C.01.08-2025 to be marked not applicable for non-apartment-building object types. Typecheck/diff check passed and Vercel production deployment `dpl_BL1ftd5jyt7BNPYxBh4TGw76d3ZW` is READY.
+
 ## 2026-08-06 Production Data Reset
 
 - On explicit user instruction, performed one transaction with `TRUNCATE ... RESTART IDENTITY` on only the agreed working data tables: `clients`, `objects`, `projects`, `documents`, `contracts`, `expert_reviews`, plus dependent `project_systems`, `contract_objects`, `acts`, and `payments`.
