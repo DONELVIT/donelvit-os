@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "verification-001",
+  "active_feature_id": null,
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -149,9 +149,9 @@
       "name": "Project verification against Moldova fire-safety requirements",
       "description": "Provide a project-verification workspace for all object categories, covering fire-safety and documentation-completeness checks with traceable Republic of Moldova sources.",
       "dependencies": ["mvp-010"],
-      "status": "in-progress",
+      "status": "complete",
       "acceptance_criteria": ["All supported object categories can be selected and receive an appropriate verification profile.", "The workspace separates fire-safety requirements from documentation-completeness checks and identifies the source act.", "The user workflow makes clear that results are internal verification, not an official expert opinion.", "No unapproved Supabase schema, RLS, or role change is made."],
-      "evidence": "2026-08-06: User confirmed scope: all object types, with checks against Republic of Moldova legislation and construction/fire-safety norms. Initial official-source audit identified Law No. 267/1994, Government Decision No. 847/2022, and CP E.03.02:2018. Implemented read-only /verification workspace with five profiles that collectively cover residential; public/administrative; industrial, storage and agricultural; infrastructure/special; and reconstruction, repurposing and temporary objects. Each profile separates fire-safety and documentation-completeness checks and links the official sources. It clearly labels results as internal verification. No Supabase changes were made. npm run typecheck passed; git diff --check passed. Local Next.js build is blocked before application compilation by the documented Windows sandbox spawn EPERM. Manual browser verification remains required."
+      "evidence": "2026-08-06: User confirmed scope: all object types, with checks against Republic of Moldova legislation and construction/fire-safety norms. Initial official-source audit identified Law No. 267/1994, Government Decision No. 847/2022, and CP E.03.02:2018. Implemented read-only /verification workspace with five profiles that collectively cover residential; public/administrative; industrial, storage and agricultural; infrastructure/special; and reconstruction, repurposing and temporary objects. Each profile separates fire-safety and documentation-completeness checks and links the official sources. It clearly labels results as internal verification. No Supabase changes were made. npm run typecheck and git diff --check passed. Production commit c658503 deployed as dpl_Dp8i8Fmxur5DhPFY3oycxaZCMXRy (READY); an authenticated Vercel fetch of /verification returned 200 and confirmed the navigation, profiles and checklist content. Local Next.js build remains blocked before application compilation by the documented Windows sandbox spawn EPERM."
     }
   ]
 }

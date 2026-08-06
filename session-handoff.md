@@ -145,7 +145,7 @@
 - No Supabase schema, RLS, role, or migration approval has been granted for this feature. Build the first workspace as a read-only, versioned catalogue/UI; request approval before persisting check results, attachments, or assignments.
 - 2026-08-06 baseline: `npm run typecheck` passed via `./init.ps1`; `next build` stopped at known local Windows sandbox `spawn EPERM` while creating the optimized build, before an application compilation error.
 - Implemented `app/verification/page.tsx` and `lib/verification/catalog.ts`; sidebar now links to `/verification`. Five selectable profiles are read-only and cover the full agreed category set. Every profile contains separate fire-safety and documentation-completeness checklists; the screen links Law No. 267/1994, HG No. 847/2022 and CP E.03.02:2018. It carries an internal-verification disclaimer.
-- Verification after implementation: `npm run typecheck` and `git diff --check` passed on 2026-08-06. Manual browser verification of `/verification` and a decision on persistence model are still required before the feature can be completed.
+- Verification after implementation: `npm run typecheck` and `git diff --check` passed on 2026-08-06. Production commit `c658503` deployed as `dpl_Dp8i8Fmxur5DhPFY3oycxaZCMXRy` (READY); fetching `/verification` returned HTTP 200 and confirmed the module navigation, five profiles and checklist content. `verification-001` is complete. Persistence of results, assignments and evidence remains a separate future feature requiring explicit Supabase model/RLS approval.
 
 ## 2026-07-30 DOCX Template Handoff
 
