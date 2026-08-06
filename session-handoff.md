@@ -169,8 +169,8 @@
 
 ## 2026-08-06 Mandatory Verification Norms
 
-- User requires every project verification to use: NCM G.02.01:2017 (electronic communication, automation and signalling systems), NCM C.01.08-2025 (apartment buildings) and NCM E.03.03-2018 (fire signalling and warning installations). Official EDNC audit confirms each record is in force; NCM C.01.08-2025 took effect 19 December 2025 and replaces the 2016 edition.
-- Commit `821aece` adds official EDNC source links to the Verification workspace and injects the three records into the AI instruction as a priority mandatory normative basis. The instruction avoids a false nonconformity by requiring NCM C.01.08-2025 to be marked not applicable for non-apartment-building object types. Typecheck/diff check passed and Vercel production deployment `dpl_BL1ftd5jyt7BNPYxBh4TGw76d3ZW` is READY.
+- User requires every project verification to use: NCM G.02.01:2017 (electronic communication, automation and signalling systems), NCM C.01.08:2025 (apartment buildings) and NCM E.03.03-2018 (fire signalling and warning installations). Official EDNC audit confirms each record is in force; NCM C.01.08:2025 took effect 19 December 2025 and replaces the 2016 edition.
+- Commit `821aece` adds official EDNC source links to the Verification workspace and injects the three records into the AI instruction as a priority mandatory normative basis. The instruction avoids a false nonconformity by requiring NCM C.01.08:2025 to be marked not applicable for non-apartment-building object types. Typecheck/diff check passed and Vercel production deployment `dpl_BL1ftd5jyt7BNPYxBh4TGw76d3ZW` is READY.
 
 ## 2026-08-06 Production Data Reset
 

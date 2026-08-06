@@ -40,7 +40,7 @@
 
 ## Latest Verification
 
-- 2026-08-06: Made NCM G.02.01:2017, NCM C.01.08-2025 and NCM E.03.03-2018 mandatory normative sources for AI project verification. The three official EDNC source cards appear in the workspace and the server instruction treats them as priority references, with C.01.08-2025 marked not applicable outside apartment buildings. `npm run typecheck` and `git diff --check` passed. Commit `821aece` is deployed to production as `dpl_BL1ftd5jyt7BNPYxBh4TGw76d3ZW` (READY).
+- 2026-08-06: Made NCM G.02.01:2017, NCM C.01.08:2025 and NCM E.03.03-2018 mandatory normative sources for AI project verification. The three official EDNC source cards appear in the workspace and the server instruction treats them as priority references, with C.01.08:2025 marked not applicable outside apartment buildings. `npm run typecheck` and `git diff --check` passed. Commit `821aece` is deployed to production as `dpl_BL1ftd5jyt7BNPYxBh4TGw76d3ZW` (READY).
 
 - 2026-08-06: Fixed the user-observed OpenAI error `Mutually exclusive parameters: file_id or filename`. The private Blob URL path had incorrectly included `filename`; official Responses examples show `input_file` with `file_url` alone. Removed `filename`, preserved the private signed URL and automatic deletion, and deployed commit `b5f660a` as `dpl_76vNvLesAHcekjNmgR18heVKP8eo` (READY). `npm run typecheck` and `git diff --check` passed. Retest the same authenticated file submission.
 
