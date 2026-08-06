@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": null,
+  "active_feature_id": "verification-001",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -143,6 +143,15 @@
       "completion_evidence": "2026-08-06: Completed. Sources and rights are documented; users can find standards by code, title and family; official EDNC sources remain authoritative. Exact user-authorised local reference copies are linked only through existing JSON metadata and retain their private Google Drive permissions. npm run typecheck passed. ./init.ps1 again confirmed the known local Next.js build limitation: spawn EPERM during optimized build, with no application compilation error.",
       "acceptance_criteria": ["Catalog sources and usage rights are explicit.", "Users can find standards by code, title and family.", "Document access and metadata storage follow approved platform capabilities."],
       "evidence": "2026-08-06: User requested an Engineering Library / Standards catalog for NCM, HG, EN and ISO, to be implemented after the project-management core. Detailed sources, licensing/access rules, metadata fields and import approach are intentionally pending before implementation."
+    },
+    {
+      "id": "verification-001",
+      "name": "Project verification against Moldova fire-safety requirements",
+      "description": "Provide a project-verification workspace for all object categories, covering fire-safety and documentation-completeness checks with traceable Republic of Moldova sources.",
+      "dependencies": ["mvp-010"],
+      "status": "in-progress",
+      "acceptance_criteria": ["All supported object categories can be selected and receive an appropriate verification profile.", "The workspace separates fire-safety requirements from documentation-completeness checks and identifies the source act.", "The user workflow makes clear that results are internal verification, not an official expert opinion.", "No unapproved Supabase schema, RLS, or role change is made."],
+      "evidence": "2026-08-06: User confirmed scope: all object types, with checks against Republic of Moldova legislation and construction/fire-safety norms. Initial official-source audit identified Law No. 267/1994, Government Decision No. 847/2022, and CP E.03.02:2018. Implemented read-only /verification workspace with five profiles that collectively cover residential; public/administrative; industrial, storage and agricultural; infrastructure/special; and reconstruction, repurposing and temporary objects. Each profile separates fire-safety and documentation-completeness checks and links the official sources. It clearly labels results as internal verification. No Supabase changes were made. npm run typecheck passed; git diff --check passed. Local Next.js build is blocked before application compilation by the documented Windows sandbox spawn EPERM. Manual browser verification remains required."
     }
   ]
 }

@@ -137,6 +137,16 @@
 
 - Obtain explicit approval for the client mutation access model before adding protected create/edit/archive capabilities; no existing client CRUD RPC is available.
 
+## 2026-08-06 Verification Module Handoff
+
+- Active feature is `verification-001`: internal verification of project fire-safety compliance and project-documentation completeness for all object categories, against Republic of Moldova requirements.
+- Scope approved by the user: all object types. The first delivery must keep the result explicitly internal and must not claim an official expert opinion or substitute for approval by the competent authority.
+- Authoritative starting sources: Law No. 267/1994 on fire protection, Government Decision No. 847/2022 (general fire-protection rules), and CP E.03.02:2018 (project fire-safety section and audit methodology). Check current versions on Legis/EDNC before expanding any checklist.
+- No Supabase schema, RLS, role, or migration approval has been granted for this feature. Build the first workspace as a read-only, versioned catalogue/UI; request approval before persisting check results, attachments, or assignments.
+- 2026-08-06 baseline: `npm run typecheck` passed via `./init.ps1`; `next build` stopped at known local Windows sandbox `spawn EPERM` while creating the optimized build, before an application compilation error.
+- Implemented `app/verification/page.tsx` and `lib/verification/catalog.ts`; sidebar now links to `/verification`. Five selectable profiles are read-only and cover the full agreed category set. Every profile contains separate fire-safety and documentation-completeness checklists; the screen links Law No. 267/1994, HG No. 847/2022 and CP E.03.02:2018. It carries an internal-verification disclaimer.
+- Verification after implementation: `npm run typecheck` and `git diff --check` passed on 2026-08-06. Manual browser verification of `/verification` and a decision on persistence model are still required before the feature can be completed.
+
 ## 2026-07-30 DOCX Template Handoff
 
 - Active feature is `mvp-007` only. The source template supplied by the user at `D:\DONELVIT\TEMPLATES\Contract.docx` was copied byte-for-byte to `assets\docx-templates\Contract.docx`; its SHA-256 is `1C00BCE1C3A89A4FB96D38CDCA1ED92A8B6A7D6FEA94D144912EB6D8AC08E127`.
