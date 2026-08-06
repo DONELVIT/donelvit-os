@@ -179,6 +179,12 @@
 - Rules give a baseline search-based internal report with recommendations for NCM G.02.01:2017, NCM E.03.03-2018 and NCM C.01.08:2025 for the residential profile. It must not be represented as an engineering calculation or official expertise: scanned PDFs, DWG geometry/raster sheets, DOC binary formatting and calculations require manual review or a future approved OCR/CAD engine.
 - `npm run typecheck` and `git diff --check` passed. The pre-existing local Next.js build blocker remains Windows sandbox `spawn EPERM`; run Vercel production deployment and a manual client-file check next.
 
+## 2026-08-06 Removal of Interactive Verification Modules
+
+- The user requested removal of the verification modules. Deleted `components/local-verification-analyzer.tsx`, `components/verification-analyzer.tsx`, `/api/verification/analyze`, and `/api/verification/upload`; removed their imports from `/verification`.
+- Removed unused `@vercel/blob` and `pdfjs-dist` packages. The page remains as a read-only verification reference with object profiles and normative links; no source document can now be uploaded or analysed.
+- `npx next typegen`, `npm run typecheck` and `git diff --check` pass. There is no active feature. Publish and manually fetch `/verification` next.
+
 ## 2026-08-06 Production Data Reset
 
 - On explicit user instruction, performed one transaction with `TRUNCATE ... RESTART IDENTITY` on only the agreed working data tables: `clients`, `objects`, `projects`, `documents`, `contracts`, `expert_reviews`, plus dependent `project_systems`, `contract_objects`, `acts`, and `payments`.

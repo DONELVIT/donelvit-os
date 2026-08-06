@@ -40,6 +40,8 @@
 
 ## Latest Verification
 
+- 2026-08-06: Per user request, removed both interactive verification modules from `/verification`: the browser-only PDF/DOCX/DOC/DWG analyzer and the optional OpenAI/Blob upload analyzer. Deleted the associated API routes and unused `@vercel/blob` and `pdfjs-dist` dependencies. The reference-only object profiles and normative source cards remain. `npx next typegen`, `npm run typecheck` and `git diff --check` passed; Vercel production verification is pending.
+
 - 2026-08-06: Added a browser-only project-verification fallback because the OpenAI account has no remaining API credits. The new `/verification` panel accepts PDF, DOCX, DOC and DWG up to 25 MB and does not upload, persist or send the file to OpenAI. PDF text is extracted with PDF.js, DOCX text from its document XML, and legacy DOC/DWG use available textual labels. Deterministic baseline rules reference NCM G.02.01:2017, NCM C.01.08:2025 for apartment buildings, and NCM E.03.03-2018. DOC/DWG geometry, scanned pages and engineering calculations remain explicitly manual-review items. `npm run typecheck` and `git diff --check` passed; production deployment verification is pending.
 
 - 2026-08-06: Made NCM G.02.01:2017, NCM C.01.08:2025 and NCM E.03.03-2018 mandatory normative sources for AI project verification. The three official EDNC source cards appear in the workspace and the server instruction treats them as priority references, with C.01.08:2025 marked not applicable outside apartment buildings. `npm run typecheck` and `git diff --check` passed. Commit `821aece` is deployed to production as `dpl_BL1ftd5jyt7BNPYxBh4TGw76d3ZW` (READY).

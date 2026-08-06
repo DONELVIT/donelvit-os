@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "verification-002",
+  "active_feature_id": null,
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -155,12 +155,12 @@
     },
     {
       "id": "verification-002",
-      "name": "Local and AI analysis of uploaded project documentation",
-      "description": "Allow an employee to submit a local PDF, DOCX, DOC or DWG for browser-only baseline analysis, with an optional transient AI analysis when an OpenAI key and billing are available.",
+      "name": "Local and AI analysis of uploaded project documentation (removed)",
+      "description": "The interactive document-upload and analysis modules were removed from the product at the user's request.",
       "dependencies": ["verification-001"],
-      "status": "in-progress",
-      "acceptance_criteria": ["An employee can select a PDF, DOCX, DOC or DWG on their computer and choose an object profile.", "The local baseline check processes the file in the browser without sending it to a server, OpenAI or storage, and returns an internal report with recommendations.", "Optional server AI analysis, when configured, sends the file to OpenAI without persisting the source document and returns a structured internal-verification report.", "The report contains findings, normative reference, evidence and recommendations, with an explicit non-official disclaimer.", "The API key is server-only and no unapproved Supabase schema, storage policy or RLS change is made."],
-      "evidence": "2026-08-06: User explicitly approved transient processing of project documentation through the OpenAI API and no permanent storage of the source file. Initial implementation used a 4 MB request limit and server-side base64. It has now been replaced by a private Vercel Blob store (`donelvit-verification`, Frankfurt) connected to Production and Preview with server-only BLOB_READ_WRITE_TOKEN. The authenticated browser uploads PDF/DOCX directly to a private, user-scoped Blob path; the API issues a ten-minute presigned GET URL only to OpenAI and deletes the Blob in finally after every analysis attempt. Upload size is now 50 MB, matching OpenAI's current per-file and combined Responses file-input limit. The key remains server-only; neither source nor result is persisted in Supabase. User acceptance exposed an OpenAI 400 caused by sending mutually exclusive `filename` and `file_url` fields. The API route now sends only `file_url`, in accordance with official Responses file-URL examples. The user also made NCM G.02.01:2017, NCM C.01.08:2025 and NCM E.03.03-2018 mandatory for project verification: they are shown as official EDNC sources and injected as the priority normative basis in every analysis; C.01.08:2025 is explicitly marked not applicable rather than misapplied outside residential apartment buildings. After OpenAI billing credits were exhausted, the user requested a local alternative. The new browser-only panel accepts PDF, DOCX, DOC and DWG up to 25 MB; it uses PDF.js for PDF text, DOCX XML extraction, and text-label extraction for legacy DOC/DWG. It evaluates deterministic text-based baseline rules for the required norms and returns recommendations without any file upload, storage, API key or external service. DOC/DWG geometry, scanned documents and engineering calculations are expressly marked for manual review. `npm run typecheck` and `git diff --check` passed; local next build remains blocked before application compilation by Windows sandbox spawn EPERM. Production deployment verification is pending."
+      "status": "complete",
+      "acceptance_criteria": ["All interactive upload and analysis components and their verification API routes are removed.", "Unused Blob and local-PDF analysis dependencies are removed.", "The reference-only verification workspace and normative source cards remain available."],
+      "evidence": "2026-08-06: At the user's request, removed both the local browser-only analyzer and the optional OpenAI analyzer. Deleted their UI components and both `/api/verification` routes, removed `@vercel/blob` and `pdfjs-dist`, and retained only the non-interactive verification profiles and normative sources. `npx next typegen`, `npm run typecheck` and `git diff --check` passed."
     },
     {
       "id": "engineering-agent-001",
