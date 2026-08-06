@@ -155,6 +155,12 @@
 - Implemented `components/verification-analyzer.tsx` and `app/api/verification/analyze/route.ts`. The UI accepts authenticated employee uploads only, limits PDF/DOCX files to 4 MB, and displays structured internal findings/recommendations in the browser. The endpoint keeps neither source file nor report, sends the file directly as a base64 `input_file` to the OpenAI Responses API, and uses `gpt-5.6-terra` with strict JSON schema output. `.env.example` now documents server-only `OPENAI_API_KEY`.
 - `npm run typecheck` and `git diff --check` passed on 2026-08-06. Production deployment `dpl_CHD4DrBHjVH7d9P7vAzkgfjJweF5` for commit `d686266` is READY; `/verification` returned HTTP 200 and rendered the file-upload control. The end-to-end flow cannot be executed until a valid `OPENAI_API_KEY` is added to the Vercel Production environment; do not add a key to source control or expose it as `NEXT_PUBLIC_*`.
 
+## 2026-08-06 Production Data Reset
+
+- On explicit user instruction, performed one transaction with `TRUNCATE ... RESTART IDENTITY` on only the agreed working data tables: `clients`, `objects`, `projects`, `documents`, `contracts`, `expert_reviews`, plus dependent `project_systems`, `contract_objects`, `acts`, and `payments`.
+- Pre-reset counts were 7 clients, 6 objects, 6 projects, 2 documents, 2 contracts, 1 expert review and 2 project-system links. Post-reset verification confirms all ten target tables contain 0 rows.
+- Auth users, `user_roles` (1 row), `normatives` (3 rows), settings, templates, schema, RLS and Google Drive files were not changed.
+
 ## 2026-07-30 DOCX Template Handoff
 
 - Active feature is `mvp-007` only. The source template supplied by the user at `D:\DONELVIT\TEMPLATES\Contract.docx` was copied byte-for-byte to `assets\docx-templates\Contract.docx`; its SHA-256 is `1C00BCE1C3A89A4FB96D38CDCA1ED92A8B6A7D6FEA94D144912EB6D8AC08E127`.
