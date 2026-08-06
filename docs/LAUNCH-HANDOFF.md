@@ -18,6 +18,7 @@
 
 - Production uses server-only Google OAuth settings plus `GOOGLE_DRIVE_CONTRACTS_FOLDER_ID`; do not expose their values. On 2026-08-06, authenticated production generation uploaded `Договор E2E-CONTRACT-20260730.docx` to the approved Drive folder and automatically linked it to contract ID 1 as document ID 5.
 - The generated DOCX was visually inspected in Google Docs on 2026-08-06; title, party requisites, headings and object substitution are readable with no visible layout breakage or unresolved markers.
+- 2026-08-06 Security Advisor audit: resolve `donelvit.set_updated_at` mutable search_path with a fixed trigger-function setting after approval. Leaked-password protection remains disabled until it is enabled in Supabase Auth settings; this option requires Pro plan or above.
 - Consider enabling Supabase leaked-password protection and resolving the existing mutable search path warning in `donelvit.set_updated_at` as separate security work.
 
 ## Verification baseline

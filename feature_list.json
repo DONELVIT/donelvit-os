@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": null,
+  "active_feature_id": "security-001",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -118,6 +118,15 @@
       "status": "complete",
       "acceptance_criteria": ["Active system types can be selected when creating and editing a project.", "Selections persist only through authenticated guarded RPCs.", "Production form and project Systems tab are manually verified."],
       "evidence": "2026-07-30/31: User approved the protected RPC/RLS change. UI loads active system types and adds checkbox selection to the Project form. New authenticated-only create_project/update_project overloads validate active IDs and write the existing project_systems relation without granting browser table writes. npm run typecheck passed; local build remains blocked by sandbox spawn EPERM. Commit ca27534 deployed to production as dpl_FtgXqZWJovQMGdmugRQwMKZkgFzk (READY). Authenticated production acceptance selected CCTV for project ID 1, saved successfully, showed system count 1, and displayed Supraveghere video in /projects/1?tab=systems."
+    },
+    {
+      "id": "security-001",
+      "name": "Supabase security hardening",
+      "description": "Resolve the two current Supabase Security Advisor warnings without changing application authorization behaviour.",
+      "dependencies": ["mvp-009"],
+      "status": "in-progress",
+      "acceptance_criteria": ["The mutable search_path warning is resolved and trigger behaviour is verified.", "Leaked-password protection is enabled if the project plan supports it.", "Security Advisor results and residual risks are recorded."],
+      "evidence": "2026-08-06 read-only audit: Security Advisor reports two warnings only. donelvit.set_updated_at has no fixed search_path; its current body only assigns new.updated_at = now() and returns new. Proposed SQL is CREATE OR REPLACE FUNCTION donelvit.set_updated_at() RETURNS trigger LANGUAGE plpgsql SET search_path = donelvit, pg_temp AS $$ BEGIN NEW.updated_at = now(); RETURN NEW; END; $$;. The second warning is Auth leaked-password protection disabled; Supabase documentation says it is enabled in Auth settings and available on Pro plan or above. No setting or database change was applied during the audit."
     }
   ]
 }
