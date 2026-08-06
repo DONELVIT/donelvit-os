@@ -1,6 +1,9 @@
 export type VerificationProfile = { id: string; name: string; description: string; fireSafetyChecks: string[]; documentationChecks: string[] };
 
 export const verificationSources = [
+  { code: "NCM G.02.01:2017", title: "Rețele (sisteme) de comunicații electronice, instalații de automatizare și semnalizare pentru clădiri și construcții", url: "https://ednc.gov.md/ncm-g-02-012017/" },
+  { code: "NCM C.01.08-2025", title: "Blocuri locative", url: "https://ednc.gov.md/ncm-c-01-08-2025/" },
+  { code: "NCM E.03.03-2018", title: "Siguranța la incendii. Instalații de semnalizare și avertizare de incendiu", url: "https://ednc.gov.md/ncm-e-03-03-2018/" },
   { code: "Legea nr. 267/1994", title: "privind apărarea împotriva incendiilor", url: "https://www.legis.md/cautare/downloadpdf/137390" },
   { code: "HG nr. 847/2022", title: "Regulile generale de apărare împotriva incendiilor în Republica Moldova", url: "https://www.legis.md/cautare/downloadpdf/137695" },
   { code: "CP E.03.02:2018", title: "Siguranța la incendii: metodologia compartimentului de proiect și auditului", url: "https://www.legis.md/cautare/downloadpdf/114027" },
