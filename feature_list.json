@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": "security-001",
+  "active_feature_id": "mvp-010",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -126,7 +126,7 @@
       "dependencies": ["mvp-009"],
       "status": "blocked",
       "applied_evidence": "2026-08-06: Applied Supabase migration fix_set_updated_at_search_path. The updated function retains its trigger body and now has SET search_path TO 'donelvit', 'pg_temp'. A fresh Security Advisor scan confirms the function-search-path warning is resolved.",
-      "blocker": "Leaked-password protection is only available on Pro plan and above. The connected project is on the Free plan, and the Email provider UI marks the setting unavailable. No billing or Auth configuration was changed.",
+      "blocker": "Deferred by user on 2026-08-06. Leaked-password protection is only available on Pro plan and above. The connected project is on the Free plan, and the Email provider UI marks the setting unavailable. No billing or Auth configuration was changed.",
       "acceptance_criteria": ["The mutable search_path warning is resolved and trigger behaviour is verified.", "Leaked-password protection is enabled if the project plan supports it.", "Security Advisor results and residual risks are recorded."],
       "evidence": "2026-08-06 read-only audit: Security Advisor reports two warnings only. donelvit.set_updated_at has no fixed search_path; its current body only assigns new.updated_at = now() and returns new. Proposed SQL is CREATE OR REPLACE FUNCTION donelvit.set_updated_at() RETURNS trigger LANGUAGE plpgsql SET search_path = donelvit, pg_temp AS $$ BEGIN NEW.updated_at = now(); RETURN NEW; END; $$;. The second warning is Auth leaked-password protection disabled; Supabase documentation says it is enabled in Auth settings and available on Pro plan or above. No setting or database change was applied during the audit."
     },
@@ -135,7 +135,8 @@
       "name": "Engineering standards library",
       "description": "Provide a searchable engineering library catalog for NCM, HG, EN and ISO standards after the project-management core.",
       "dependencies": ["mvp-009"],
-      "status": "planned",
+      "status": "in-progress",
+      "audit_evidence": "2026-08-06: Read-only audit found that /normatives is a static placeholder only. No routes, components, API, data helper, type, migration or existing catalog exists. Expert Reviews contain only a free-text normative_reference field. Planned registry shape is /normatives with search/filter/pagination and /normatives/[id] for metadata and authorised access links; relational links to reviews require separately approved schema/RLS work.",
       "acceptance_criteria": ["Catalog sources and usage rights are explicit.", "Users can find standards by code, title and family.", "Document access and metadata storage follow approved platform capabilities."],
       "evidence": "2026-08-06: User requested an Engineering Library / Standards catalog for NCM, HG, EN and ISO, to be implemented after the project-management core. Detailed sources, licensing/access rules, metadata fields and import approach are intentionally pending before implementation."
     }

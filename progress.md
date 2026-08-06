@@ -74,6 +74,10 @@
 
 - [ ] 2026-08-06: Added planned `mvp-010` Engineering standards library after the project-management core. Intended catalog families are NCM, HG, EN and ISO. Implementation is not started: source ownership/licensing, required metadata, search behaviour and document-access approach need agreement first.
 
+- [ ] 2026-08-06: User deferred the paid Supabase Free-to-Pro upgrade, leaving `security-001` blocked only by leaked-password protection. `mvp-010` Engineering standards library is now active. Start with a read-only audit of the existing Normatives route and a requirements brief; do not import or publish standards until authoritative sources and licensing/access terms are approved.
+
+- [ ] 2026-08-06: `mvp-010` read-only audit completed. `/normatives` is a static placeholder with no catalog data model, API, types or child routes. The only related data is the free-text `normative_reference` on Expert Reviews. A requirements brief now records the authoritative-source, licensing, metadata, search, access-control and update-ownership decisions required before implementation. No standards, PDFs, database schema or external service were changed.
+
 - [x] 2026-07-30: Expert Review production acceptance passed. Created review ID 1 linked to project E2E acceptance test 2026-07-29 — updated and document E2E Document acceptance 2026-07-30 — updated; updated it to `resolved` with the resolution text. RLS is enabled; anon has SELECT only, and direct INSERT is denied to anon and authenticated. Guarded RPCs deny anon EXECUTE, grant authenticated EXECUTE, and contain `auth.uid()` checks. `npm run typecheck` passed; local build stopped at known `spawn EPERM`.
 
 - [x] 2026-07-30: Contracts production acceptance passed: contract ID 1 was created, edited (service `E2E acceptance updated`, revision `rev-2`), then archived. Registry showed `archived`; detail showed `1000 MDL` and the related-documents section. `npm run typecheck` passed; local `npm run build` stopped at the known Windows sandbox `spawn EPERM` after starting the optimized build.

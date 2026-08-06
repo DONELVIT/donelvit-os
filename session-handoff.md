@@ -24,6 +24,10 @@
 
 - Update 2026-08-06: Added planned `mvp-010` Engineering standards library for NCM, HG, EN and ISO after the project-management core. Do not begin it while `security-001` is active. Before implementation, obtain the authoritative sources, licensing/access rules, catalog metadata and expected search behaviour.
 
+- Update 2026-08-06: User deferred the paid upgrade. `security-001` remains blocked only by the Pro-plan leaked-password setting. `mvp-010` is now active: audit the existing Normatives route and then request authoritative NCM/HG/EN/ISO sources, licensing/access terms, required metadata and search expectations before any catalog import or schema change.
+
+- Update 2026-08-06: `mvp-010` audit is complete. `/normatives` is a static placeholder, with no catalog route/data model/API; the existing Expert Review `normative_reference` is free text only. Next implementation requires the inputs in `docs/NORMATIVES-REQUIREMENTS.md`. Use metadata plus authorised links by default; do not upload/index/distribute NCM/HG/EN/ISO PDFs without explicit rights and a separately approved schema/RLS design.
+
 - Update 2026-07-30: Client banking requisites maintenance is deployed and production-verified. `components/client-form.tsx` collects IBAN, Banca, BIC; new authenticated-only `create_client`/`update_client` RPC overloads persist those fields without a table or RLS change. `npm run typecheck` passed; E2E Banking Client 20260730 was created in production and its detail page displayed all three saved values. Contract currency now stores three characters and production detail shows `1000 MDL`; final Contract edit/archive and document-reference verification remain pending.
 
 - Update 2026-07-30: `mvp-005` Contracts is complete. Production contract ID 1 was created, edited, and archived; the detail page displays `1000 MDL` and the linked-documents section. `mvp-006` Expert Review is the active feature; inspect its existing schema and routes before proposing any mutation model.
