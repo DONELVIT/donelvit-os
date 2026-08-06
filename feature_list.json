@@ -160,7 +160,7 @@
       "dependencies": ["verification-001"],
       "status": "complete",
       "acceptance_criteria": ["All interactive upload and analysis components and their verification API routes are removed.", "Unused Blob and local-PDF analysis dependencies are removed.", "The reference-only verification workspace and normative source cards remain available."],
-      "evidence": "2026-08-06: At the user's request, removed both the local browser-only analyzer and the optional OpenAI analyzer. Deleted their UI components and both `/api/verification` routes, removed `@vercel/blob` and `pdfjs-dist`, and retained only the non-interactive verification profiles and normative sources. `npx next typegen`, `npm run typecheck` and `git diff --check` passed."
+      "evidence": "2026-08-06: At the user's request, removed both the local browser-only analyzer and the optional OpenAI analyzer. Deleted their UI components and both `/api/verification` routes, removed `@vercel/blob` and `pdfjs-dist`, and retained only the non-interactive verification profiles and normative sources. `npx next typegen`, `npm run typecheck`, `npm run build` and `git diff --check` passed."
     },
     {
       "id": "engineering-agent-001",

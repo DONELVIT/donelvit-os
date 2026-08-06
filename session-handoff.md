@@ -183,7 +183,7 @@
 
 - The user requested removal of the verification modules. Deleted `components/local-verification-analyzer.tsx`, `components/verification-analyzer.tsx`, `/api/verification/analyze`, and `/api/verification/upload`; removed their imports from `/verification`.
 - Removed unused `@vercel/blob` and `pdfjs-dist` packages. The page remains as a read-only verification reference with object profiles and normative links; no source document can now be uploaded or analysed.
-- `npx next typegen`, `npm run typecheck` and `git diff --check` pass. There is no active feature. Publish and manually fetch `/verification` next.
+- `npx next typegen`, `npm run typecheck`, `npm run build` and `git diff --check` pass. There is no active feature. Publish and manually fetch `/verification` next.
 
 ## 2026-08-06 Production Data Reset
 
