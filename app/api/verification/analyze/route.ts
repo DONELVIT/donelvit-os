@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         model: "gpt-5.6-terra",
         max_output_tokens: 4000,
-        input: [{ role: "user", content: [{ type: "input_file", filename, file_url: presignedUrl, ...(extension === "pdf" ? { detail: "high" } : {}) }, { type: "input_text", text: instruction }] }],
+        input: [{ role: "user", content: [{ type: "input_file", file_url: presignedUrl, ...(extension === "pdf" ? { detail: "high" } : {}) }, { type: "input_text", text: instruction }] }],
         text: { format: { type: "json_schema", name: "verification_report", strict: true, schema } },
       }),
     });
