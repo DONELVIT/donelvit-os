@@ -16,7 +16,7 @@
 
 ## Deferred operational work
 
-- Production Vercel settings `GOOGLE_SERVICE_ACCOUNT_JSON` (sensitive) and `GOOGLE_DRIVE_CONTRACTS_FOLDER_ID` are configured. A signed-in production generation run on 2026-07-31 rendered the DOCX but Google Drive returned HTTP 403 for the upload, so the exact approved folder still needs to be shared with `vercel-drive@contracte-proiectare.iam.gserviceaccount.com` as Editor before live upload can succeed.
+- Production uses server-only Google OAuth settings plus `GOOGLE_DRIVE_CONTRACTS_FOLDER_ID`; do not expose their values. On 2026-08-06, authenticated production generation uploaded `Договор E2E-CONTRACT-20260730.docx` to the approved Drive folder and automatically linked it to contract ID 1 as document ID 5.
 - Visually render and inspect a generated DOCX. Local LibreOffice/soffice is unavailable.
 - Consider enabling Supabase leaked-password protection and resolving the existing mutable search path warning in `donelvit.set_updated_at` as separate security work.
 
