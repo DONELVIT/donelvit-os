@@ -147,6 +147,14 @@
 - Implemented `app/verification/page.tsx` and `lib/verification/catalog.ts`; sidebar now links to `/verification`. Five selectable profiles are read-only and cover the full agreed category set. Every profile contains separate fire-safety and documentation-completeness checklists; the screen links Law No. 267/1994, HG No. 847/2022 and CP E.03.02:2018. It carries an internal-verification disclaimer.
 - Verification after implementation: `npm run typecheck` and `git diff --check` passed on 2026-08-06. Production commit `c658503` deployed as `dpl_Dp8i8Fmxur5DhPFY3oycxaZCMXRy` (READY); fetching `/verification` returned HTTP 200 and confirmed the module navigation, five profiles and checklist content. `verification-001` is complete. Persistence of results, assignments and evidence remains a separate future feature requiring explicit Supabase model/RLS approval.
 
+## 2026-08-06 AI Verification Analysis Handoff
+
+- Active feature is `verification-002`. The user approved sending project PDF/DOCX files for transient OpenAI API analysis and requested recommendations for eliminating discrepancies. Do not persist the uploaded file or result in Supabase without separate approval.
+- The processing endpoint must require the existing authenticated employee session, use only server-side `OPENAI_API_KEY`, limit request size, return a structured internal report, and make clear that it is not an official expertise conclusion.
+- OpenAI Docs MCP setup was attempted as instructed but `codex.exe` was denied by the local environment even after escalation. Fallback verification used official OpenAI developer documentation: Responses `input_file` supports base64 PDF/DOCX; PDFs include extracted text and page images on vision-capable models, while DOCX provides extracted text.
+- Implemented `components/verification-analyzer.tsx` and `app/api/verification/analyze/route.ts`. The UI accepts authenticated employee uploads only, limits PDF/DOCX files to 4 MB, and displays structured internal findings/recommendations in the browser. The endpoint keeps neither source file nor report, sends the file directly as a base64 `input_file` to the OpenAI Responses API, and uses `gpt-5.6-terra` with strict JSON schema output. `.env.example` now documents server-only `OPENAI_API_KEY`.
+- `npm run typecheck` and `git diff --check` passed on 2026-08-06. The production flow cannot be executed until a valid `OPENAI_API_KEY` is added to the Vercel Production environment; do not add a key to source control or expose it as `NEXT_PUBLIC_*`.
+
 ## 2026-07-30 DOCX Template Handoff
 
 - Active feature is `mvp-007` only. The source template supplied by the user at `D:\DONELVIT\TEMPLATES\Contract.docx` was copied byte-for-byte to `assets\docx-templates\Contract.docx`; its SHA-256 is `1C00BCE1C3A89A4FB96D38CDCA1ED92A8B6A7D6FEA94D144912EB6D8AC08E127`.
