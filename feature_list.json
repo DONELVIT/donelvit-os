@@ -124,7 +124,9 @@
       "name": "Supabase security hardening",
       "description": "Resolve the two current Supabase Security Advisor warnings without changing application authorization behaviour.",
       "dependencies": ["mvp-009"],
-      "status": "in-progress",
+      "status": "blocked",
+      "applied_evidence": "2026-08-06: Applied Supabase migration fix_set_updated_at_search_path. The updated function retains its trigger body and now has SET search_path TO 'donelvit', 'pg_temp'. A fresh Security Advisor scan confirms the function-search-path warning is resolved.",
+      "blocker": "Leaked-password protection is only available on Pro plan and above. The connected project is on the Free plan, and the Email provider UI marks the setting unavailable. No billing or Auth configuration was changed.",
       "acceptance_criteria": ["The mutable search_path warning is resolved and trigger behaviour is verified.", "Leaked-password protection is enabled if the project plan supports it.", "Security Advisor results and residual risks are recorded."],
       "evidence": "2026-08-06 read-only audit: Security Advisor reports two warnings only. donelvit.set_updated_at has no fixed search_path; its current body only assigns new.updated_at = now() and returns new. Proposed SQL is CREATE OR REPLACE FUNCTION donelvit.set_updated_at() RETURNS trigger LANGUAGE plpgsql SET search_path = donelvit, pg_temp AS $$ BEGIN NEW.updated_at = now(); RETURN NEW; END; $$;. The second warning is Auth leaked-password protection disabled; Supabase documentation says it is enabled in Auth settings and available on Pro plan or above. No setting or database change was applied during the audit."
     },
