@@ -17,7 +17,7 @@
 ## Deferred operational work
 
 - Production uses server-only Google OAuth settings plus `GOOGLE_DRIVE_CONTRACTS_FOLDER_ID`; do not expose their values. On 2026-08-06, authenticated production generation uploaded `Договор E2E-CONTRACT-20260730.docx` to the approved Drive folder and automatically linked it to contract ID 1 as document ID 5.
-- Visually render and inspect a generated DOCX. Local LibreOffice/soffice is unavailable.
+- The generated DOCX was visually inspected in Google Docs on 2026-08-06; title, party requisites, headings and object substitution are readable with no visible layout breakage or unresolved markers.
 - Consider enabling Supabase leaked-password protection and resolving the existing mutable search path warning in `donelvit.set_updated_at` as separate security work.
 
 ## Verification baseline

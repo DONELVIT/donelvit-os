@@ -16,6 +16,8 @@
 
 - Update 2026-08-06: The user replaced the production refresh token and deployed Vercel. One authenticated production generation for contract ID 1, selecting `Fabrica Articole din Tutun`, succeeded. The Google Drive folder contains `Договор E2E-CONTRACT-20260730.docx` (26,397 bytes), and `/contracts/1` lists it as linked document ID 5. OAuth upload and automatic document registration are complete. `mvp-007` remains active only for visual DOCX rendering/inspection; do not alter its data or OAuth configuration.
 
+- Update 2026-08-06: The generated DOCX was opened and visually inspected in Google Docs. The title, party requisites, section headings and object substitution are readable, with no visible unresolved markers or layout breakage. `mvp-007` is complete and no feature is active.
+
 - Update 2026-07-30: Client banking requisites maintenance is deployed and production-verified. `components/client-form.tsx` collects IBAN, Banca, BIC; new authenticated-only `create_client`/`update_client` RPC overloads persist those fields without a table or RLS change. `npm run typecheck` passed; E2E Banking Client 20260730 was created in production and its detail page displayed all three saved values. Contract currency now stores three characters and production detail shows `1000 MDL`; final Contract edit/archive and document-reference verification remain pending.
 
 - Update 2026-07-30: `mvp-005` Contracts is complete. Production contract ID 1 was created, edited, and archived; the detail page displays `1000 MDL` and the linked-documents section. `mvp-006` Expert Review is the active feature; inspect its existing schema and routes before proposing any mutation model.

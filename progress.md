@@ -66,6 +66,8 @@
 
 - [ ] 2026-08-06: After the user replaced the production OAuth refresh token and deployed Vercel, one authenticated production generation for contract ID 1 selected `Fabrica Articole din Tutun` and completed successfully. The contract detail now lists `Договор E2E-CONTRACT-20260730.docx` as linked document ID 5. The approved Drive folder directly contains that DOCX (26,397 bytes). OAuth upload and automatic document registration are verified; only visual rendering/inspection of the DOCX remains for `mvp-007` acceptance.
 
+- [x] 2026-08-06: `mvp-007` DOCX templates is complete. The generated DOCX was opened in Google Docs and visually checked: title, party requisites, headings and the selected object `Fabrica Articole din Tutun` render legibly, with no visible unresolved placeholders or layout breakage. No active feature remains.
+
 - [x] 2026-07-30: Expert Review production acceptance passed. Created review ID 1 linked to project E2E acceptance test 2026-07-29 — updated and document E2E Document acceptance 2026-07-30 — updated; updated it to `resolved` with the resolution text. RLS is enabled; anon has SELECT only, and direct INSERT is denied to anon and authenticated. Guarded RPCs deny anon EXECUTE, grant authenticated EXECUTE, and contain `auth.uid()` checks. `npm run typecheck` passed; local build stopped at known `spawn EPERM`.
 
 - [x] 2026-07-30: Contracts production acceptance passed: contract ID 1 was created, edited (service `E2E acceptance updated`, revision `rev-2`), then archived. Registry showed `archived`; detail showed `1000 MDL` and the related-documents section. `npm run typecheck` passed; local `npm run build` stopped at the known Windows sandbox `spawn EPERM` after starting the optimized build.
