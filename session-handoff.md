@@ -172,6 +172,13 @@
 - User requires every project verification to use: NCM G.02.01:2017 (electronic communication, automation and signalling systems), NCM C.01.08:2025 (apartment buildings) and NCM E.03.03-2018 (fire signalling and warning installations). Official EDNC audit confirms each record is in force; NCM C.01.08:2025 took effect 19 December 2025 and replaces the 2016 edition.
 - Commit `821aece` adds official EDNC source links to the Verification workspace and injects the three records into the AI instruction as a priority mandatory normative basis. The instruction avoids a false nonconformity by requiring NCM C.01.08:2025 to be marked not applicable for non-apartment-building object types. Typecheck/diff check passed and Vercel production deployment `dpl_BL1ftd5jyt7BNPYxBh4TGw76d3ZW` is READY.
 
+## 2026-08-06 Local Verification Fallback
+
+- The user requested a non-paid local option after the OpenAI account reported no remaining API credits. `components/local-verification-analyzer.tsx` is a client component rendered before the optional AI panel on `/verification`.
+- It handles PDF, DOCX, DOC and DWG files up to 25 MB entirely in the browser: PDF.js extracts PDF text, DOCX XML is read with PizZip, and DOC/DWG receive best-effort extraction of textual labels from binary content. No request is made to the server, Vercel Blob, OpenAI, Supabase or any other storage.
+- Rules give a baseline search-based internal report with recommendations for NCM G.02.01:2017, NCM E.03.03-2018 and NCM C.01.08:2025 for the residential profile. It must not be represented as an engineering calculation or official expertise: scanned PDFs, DWG geometry/raster sheets, DOC binary formatting and calculations require manual review or a future approved OCR/CAD engine.
+- `npm run typecheck` and `git diff --check` passed. The pre-existing local Next.js build blocker remains Windows sandbox `spawn EPERM`; run Vercel production deployment and a manual client-file check next.
+
 ## 2026-08-06 Production Data Reset
 
 - On explicit user instruction, performed one transaction with `TRUNCATE ... RESTART IDENTITY` on only the agreed working data tables: `clients`, `objects`, `projects`, `documents`, `contracts`, `expert_reviews`, plus dependent `project_systems`, `contract_objects`, `acts`, and `payments`.
