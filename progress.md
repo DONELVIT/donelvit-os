@@ -8,8 +8,8 @@
 
 **Current update (2026-07-30):** `mvp-006` Expert Review is complete; `mvp-007` DOCX templates is active. The production workflow created a linked review and recorded its resolution.
 
-**Last Updated:** 2026-07-30
-**Active Feature:** `mvp-004` — Documents
+**Last Updated:** 2026-08-06
+**Active Feature:** `mvp-010` — Engineering standards library
 **Operational deployment:** production deployment and GitHub → Vercel automation verified on 2026-07-29.
 **Status:** `mvp-001` — Projects, `mvp-002` — Clients, and `mvp-003` — Objects are complete. `mvp-004` — Documents is active.
 
@@ -83,6 +83,8 @@
 - [ ] 2026-08-06: Implemented the approved metadata-only MVP catalog. Migration `add_normatives_catalog` created RLS-enabled `donelvit.normatives`; anon/authenticated can only SELECT and direct browser writes are revoked. Seeded three EDNC NCM records, including NCM E.03.05:2026. `/normatives` now supports code/title search and family filtering; `/normatives/[id]` displays metadata and opens EDNC in a new tab. No PDF was copied or indexed. Typecheck passes; production deployment and manual route verification are pending.
 
 - [x] 2026-08-06: User authorised a local-file upload to a newly created Google Drive folder `DONELVIT OS — Normatives` (`https://drive.google.com/drive/folders/1OjhoIb0IGQuWUBBUDptWYCI_hOAU0Dm2`). Uploaded 27 unique recognized NCM/CP/EN/ISO files after SHA-256 duplicate filtering. Installers, templates, spreadsheets, presentations, generic materials and duplicate files were excluded. The folder is not shared publicly. Catalog entries still link to official EDNC sources; linking local Drive copies into the application requires a separate approved metadata update.
+
+- [x] 2026-08-06: Production verification for the `mvp-010` catalog passed. Deployment `dpl_917KGSAegrDybJB7VrLUgUj2Xtiv` is READY; authenticated `/normatives` showed the three EDNC records and an `E.03.05` code search returned only `NCM E.03.05:2026`. `npm run typecheck` passed. Local `npm run build` remains blocked by the known Windows sandbox `spawn EPERM` limitation.
 
 - [x] 2026-07-30: Expert Review production acceptance passed. Created review ID 1 linked to project E2E acceptance test 2026-07-29 — updated and document E2E Document acceptance 2026-07-30 — updated; updated it to `resolved` with the resolution text. RLS is enabled; anon has SELECT only, and direct INSERT is denied to anon and authenticated. Guarded RPCs deny anon EXECUTE, grant authenticated EXECUTE, and contain `auth.uid()` checks. `npm run typecheck` passed; local build stopped at known `spawn EPERM`.
 
