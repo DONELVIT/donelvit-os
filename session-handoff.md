@@ -162,6 +162,11 @@
 - `npm run typecheck` and `git diff --check` passed. Local `npm run build` again failed before app compilation with known Windows sandbox `spawn EPERM`. Vercel production deployment `dpl_7PVZYZMEKcv8rEntvtXEJaF5XHNi` is READY and `/verification` fetch returned 200, rendering the private-temporary-storage notice. Remaining acceptance is one authenticated PDF/DOCX upload using the configured key, followed by a dashboard check that the Blob was automatically deleted.
 - The user also requested a full engineering AI agent. `engineering-agent-001` is planned after `verification-002`: NCM/CP/HG/EN checks, version comparison, cause-effect matrices, INIM/address lines, power/acoustic calculations, DOCX draft opinion and proposed corrections. Before implementation, agree individual input file formats, authoritative normative sources and editions, calculation methodology, output liability wording and any data-retention/approval model.
 
+## 2026-08-06 OpenAI File-URL Fix
+
+- User tested the new flow and received `Mutually exclusive parameters: 'input[0].content[0]'. Ensure you are only providing one of: 'file_id' or 'filename'.` The request sent `filename` alongside a private `file_url`. Official OpenAI Responses file-URL examples use only `{ type: "input_file", file_url }`; `filename` is only used with base64 `file_data`.
+- Commit `b5f660a` removes `filename` from the `file_url` content item. Typecheck and diff check passed; production deployment `dpl_76vNvLesAHcekjNmgR18heVKP8eo` is READY. Ask the user to repeat the same authenticated analysis. The failed request ran the `finally` block, so its temporary Blob was deleted.
+
 ## 2026-08-06 Production Data Reset
 
 - On explicit user instruction, performed one transaction with `TRUNCATE ... RESTART IDENTITY` on only the agreed working data tables: `clients`, `objects`, `projects`, `documents`, `contracts`, `expert_reviews`, plus dependent `project_systems`, `contract_objects`, `acts`, and `payments`.

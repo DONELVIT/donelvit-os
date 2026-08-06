@@ -40,6 +40,8 @@
 
 ## Latest Verification
 
+- 2026-08-06: Fixed the user-observed OpenAI error `Mutually exclusive parameters: file_id or filename`. The private Blob URL path had incorrectly included `filename`; official Responses examples show `input_file` with `file_url` alone. Removed `filename`, preserved the private signed URL and automatic deletion, and deployed commit `b5f660a` as `dpl_76vNvLesAHcekjNmgR18heVKP8eo` (READY). `npm run typecheck` and `git diff --check` passed. Retest the same authenticated file submission.
+
 - 2026-08-06: Replaced the Verification upload route's 4 MB Vercel Function body path with a private direct-upload flow. Created Vercel Blob store `donelvit-verification` in FRA1 and connected it to `donelvit-os` Production and Preview. PDF/DOCX files upload directly to a private user-scoped Blob path; only a ten-minute signed read URL is sent to OpenAI and the server deletes the Blob after every analysis attempt. The UI limit is 50 MB because OpenAI's current file-input limit is 50 MB per request. `npm run typecheck` and `git diff --check` passed; local `npm run build` still stops at the known Windows sandbox `spawn EPERM`. Commit `ef94814` is deployed as Vercel `dpl_7PVZYZMEKcv8rEntvtXEJaF5XHNi` (READY); authenticated end-to-end upload/analysis/deletion remains the next manual check.
 
 - 2026-08-06: User requested the next product direction: a governed engineering AI agent for normative checks, project-version comparison, cause-effect matrices, INIM/address-line checks, power/acoustic calculations, DOCX expert-report drafts and proposed document corrections. This is recorded as planned `engineering-agent-001`, after `verification-002` acceptance; it requires explicit source/version, input-format and expert-approval decisions.
