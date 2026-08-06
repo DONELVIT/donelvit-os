@@ -127,6 +127,15 @@
       "status": "in-progress",
       "acceptance_criteria": ["The mutable search_path warning is resolved and trigger behaviour is verified.", "Leaked-password protection is enabled if the project plan supports it.", "Security Advisor results and residual risks are recorded."],
       "evidence": "2026-08-06 read-only audit: Security Advisor reports two warnings only. donelvit.set_updated_at has no fixed search_path; its current body only assigns new.updated_at = now() and returns new. Proposed SQL is CREATE OR REPLACE FUNCTION donelvit.set_updated_at() RETURNS trigger LANGUAGE plpgsql SET search_path = donelvit, pg_temp AS $$ BEGIN NEW.updated_at = now(); RETURN NEW; END; $$;. The second warning is Auth leaked-password protection disabled; Supabase documentation says it is enabled in Auth settings and available on Pro plan or above. No setting or database change was applied during the audit."
+    },
+    {
+      "id": "mvp-010",
+      "name": "Engineering standards library",
+      "description": "Provide a searchable engineering library catalog for NCM, HG, EN and ISO standards after the project-management core.",
+      "dependencies": ["mvp-009"],
+      "status": "planned",
+      "acceptance_criteria": ["Catalog sources and usage rights are explicit.", "Users can find standards by code, title and family.", "Document access and metadata storage follow approved platform capabilities."],
+      "evidence": "2026-08-06: User requested an Engineering Library / Standards catalog for NCM, HG, EN and ISO, to be implemented after the project-management core. Detailed sources, licensing/access rules, metadata fields and import approach are intentionally pending before implementation."
     }
   ]
 }

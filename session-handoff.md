@@ -20,6 +20,8 @@
 
 - Update 2026-08-06: `security-001` is the active feature. Read-only Supabase Security Advisor audit found two warnings: a role-mutable search_path in `donelvit.set_updated_at`, and leaked-password protection disabled. The trigger body only sets NEW.updated_at; prepare the documented replacement with fixed `search_path = donelvit, pg_temp` after explicit user approval. Enabling leaked-password protection is an Auth-dashboard configuration change and requires Pro plan or above. Do not apply either change without confirmation.
 
+- Update 2026-08-06: Added planned `mvp-010` Engineering standards library for NCM, HG, EN and ISO after the project-management core. Do not begin it while `security-001` is active. Before implementation, obtain the authoritative sources, licensing/access rules, catalog metadata and expected search behaviour.
+
 - Update 2026-07-30: Client banking requisites maintenance is deployed and production-verified. `components/client-form.tsx` collects IBAN, Banca, BIC; new authenticated-only `create_client`/`update_client` RPC overloads persist those fields without a table or RLS change. `npm run typecheck` passed; E2E Banking Client 20260730 was created in production and its detail page displayed all three saved values. Contract currency now stores three characters and production detail shows `1000 MDL`; final Contract edit/archive and document-reference verification remain pending.
 
 - Update 2026-07-30: `mvp-005` Contracts is complete. Production contract ID 1 was created, edited, and archived; the detail page displays `1000 MDL` and the linked-documents section. `mvp-006` Expert Review is the active feature; inspect its existing schema and routes before proposing any mutation model.
