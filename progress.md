@@ -169,7 +169,7 @@
 ## 2026-08-07 Contract Client List Fix
 
 - [x] Production data audit: three active Clients exist and are readable; contract creation is available to authenticated users.
-- [x] Fixed stale client options in contract create/edit pages by forcing runtime rendering. `npm run typecheck` and `git diff --check` passed; production deployment/manual verification is next.
+- [x] Fixed stale client options in contract create/edit pages by forcing runtime rendering. `npm run typecheck` and `git diff --check` passed. Production deployment `dpl_DoSYDAZMYUFj4mAWmcYmrVoRGCfc` is READY; `/contracts/new` returned HTTP 200 with all three active client options.
 
 ## Notes for Next Session
 

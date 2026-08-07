@@ -203,7 +203,7 @@
 ## 2026-08-07 Contract Client List Fix
 
 - User reported that the contract form showed only one client despite having added clients, objects and projects. Production audit found three active rows in `donelvit.clients`, with an unrestricted SELECT RLS policy; the `create_contract` RPC remains authenticated-only.
-- `app/contracts/new/page.tsx` and `app/contracts/[id]/edit/page.tsx` now export `dynamic = "force-dynamic"`, preventing Vercel from serving a build-time client list. `npm run typecheck` and `git diff --check` passed. Deploy and open `/contracts/new`; all three clients must appear before retrying creation.
+- `app/contracts/new/page.tsx` and `app/contracts/[id]/edit/page.tsx` now export `dynamic = "force-dynamic"`, preventing Vercel from serving a build-time client list. `npm run typecheck` and `git diff --check` passed. Production deployment `dpl_DoSYDAZMYUFj4mAWmcYmrVoRGCfc` is READY; `/contracts/new` returned HTTP 200 with all three active client options. User should retry creating the contract while signed in.
 
 ## 2026-07-30 Authentication and Roles Handoff
 
