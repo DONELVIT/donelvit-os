@@ -200,6 +200,11 @@
 - Drive folder supplied by user: `https://drive.google.com/drive/folders/1B4McqCVevbMxgJKAbY7UgtxxMmx4GAcF`; connector check succeeded and returned an empty folder. Do not place a key in source or `.env.local`. Next required user action is provide the service-account email/key and share that Drive folder with the email; set JSON in Vercel as `GOOGLE_SERVICE_ACCOUNT_JSON` and folder id as `GOOGLE_DRIVE_CONTRACTS_FOLDER_ID`. Afterwards push, wait for the Vercel build, then generate a real contract and verify the file, Drive link, and related Documents record.
 - Visual QA of generated DOCX is still required. LibreOffice/`soffice` is unavailable in the local environment, so the template visual render could not be produced locally.
 
+## 2026-08-07 Contract Client List Fix
+
+- User reported that the contract form showed only one client despite having added clients, objects and projects. Production audit found three active rows in `donelvit.clients`, with an unrestricted SELECT RLS policy; the `create_contract` RPC remains authenticated-only.
+- `app/contracts/new/page.tsx` and `app/contracts/[id]/edit/page.tsx` now export `dynamic = "force-dynamic"`, preventing Vercel from serving a build-time client list. `npm run typecheck` and `git diff --check` passed. Deploy and open `/contracts/new`; all three clients must appear before retrying creation.
+
 ## 2026-07-30 Authentication and Roles Handoff
 
 - The user explicitly deferred the outstanding Drive configuration and asked to continue. `mvp-007` is recorded complete with the listed operational deferrals; active feature is now `mvp-008` only.

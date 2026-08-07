@@ -1,1 +1,5 @@
-import {notFound} from "next/navigation";import {ContractForm} from "@/components/contract-form";import {getContract} from "@/lib/data/contracts";import {getClients} from "@/lib/data/clients";export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;const [item,clients]=await Promise.all([getContract(Number(id)),getClients()]);if(!item)notFound();return <ContractForm item={item} clients={clients.map(x=>({id:x.id,legal_name:x.legal_name}))}/>}
+import {notFound} from "next/navigation";import {ContractForm} from "@/components/contract-form";import {getContract} from "@/lib/data/contracts";import {getClients} from "@/lib/data/clients";
+
+export const dynamic="force-dynamic";
+
+export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;const [item,clients]=await Promise.all([getContract(Number(id)),getClients()]);if(!item)notFound();return <ContractForm item={item} clients={clients.map(x=>({id:x.id,legal_name:x.legal_name}))}/>}

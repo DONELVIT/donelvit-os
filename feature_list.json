@@ -67,6 +67,7 @@
     {
       "id": "mvp-005",
       "name": "Contracts",
+      "latest_verification": "2026-08-07: Post-launch fix made the contract create/edit routes dynamic after production contained three active clients but the create form served the client list captured at build time. Typecheck and diff check passed; deployment verification pending.",
       "description": "Deliver the MVP contracts workflow using existing data structures and functions.",
       "dependencies": ["mvp-004"],
       "status": "complete",
