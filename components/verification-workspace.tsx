@@ -63,6 +63,7 @@ export function VerificationWorkspace() {
   async function createCase(event: FormEvent) {
     event.preventDefault(); const supabase = createClient();
     if (!supabase || !caseForm.projectId) return;
+    if (caseForm.title.trim().length < 3) { setMessage("Введите название проверки не короче 3 символов."); return; }
     const project = projects.find((item) => item.id === Number(caseForm.projectId));
     const { data, error } = await supabase.from("verification_cases").insert({ project_id: Number(caseForm.projectId), title: caseForm.title, discipline: caseForm.discipline, profile: caseForm.profile, project_code: project?.project_number, object_name: project?.title }).select("id").single();
     if (error) { setMessage(error.message); return; }
