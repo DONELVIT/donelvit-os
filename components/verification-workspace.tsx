@@ -167,6 +167,7 @@ function VerificationCaseDecision({ caseId, initialStatus, initialVerdict, onSav
 }
 
 function VerificationCalculationTemplates({ caseId, onSaved, onMessage }: { caseId: number; onSaved: () => void; onMessage: (message: string) => void }) {
+  return null;
   const [power, setPower] = useState({ load: "", hours: "24", factor: "0.8" });
   const [acoustic, setAcoustic] = useState({ measured: "", limit: "" });
   const [category, setCategory] = useState({ room: "", category: "", basis: "" });
