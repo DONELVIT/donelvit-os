@@ -6,7 +6,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { verificationProfiles, verificationSources } from "@/lib/verification/catalog";
 
-type Project = { id: number; title: string; code: string | null };
+type Project = { id: number; title: string; project_number: string | null; code?: string | null };
 type VerificationCase = { id: number; title: string; project_id: number; discipline: string; profile: string; status: string; verdict: string | null; projects?: Project | Project[] | null };
 type Finding = { id: number; code: string; section: string; normative_reference: string | null; assessment: string; severity: string; correction: string | null; status: string };
 type Calculation = { id: number; kind: string; title: string; inputs: { area?: number; norm?: number }; result: { people?: number }; conclusion: string | null; review_status: string };
@@ -34,12 +34,13 @@ export function VerificationWorkspace() {
   async function loadCases(preferredId?: number) {
     const supabase = createClient();
     if (!supabase) { setMessage("Подключение к Supabase не настроено."); return; }
-    const [{ data: session }, { data: roleValue }, { data: projectData }, { data: caseData, error }] = await Promise.all([
-      supabase.auth.getUser(), supabase.rpc("get_my_role"), supabase.from("projects").select("id,title,code").order("title"),
-      supabase.from("verification_cases").select("id,title,project_id,discipline,profile,status,verdict,projects(id,title,code)").order("updated_at", { ascending: false })
+    const [{ data: session }, { data: projectData }, { data: caseData, error }] = await Promise.all([
+      supabase.auth.getUser(), supabase.from("projects").select("id,title,project_number").order("title"),
+      supabase.from("verification_cases").select("id,title,project_id,discipline,profile,status,verdict,projects(id,title,project_number)").order("updated_at", { ascending: false })
     ]);
     if (!session.user) { setMessage("Войдите в систему, чтобы открыть досье верификации."); return; }
-    setRole(roleValue.data ?? "viewer"); setProjects((projectData ?? []) as Project[]);
+    const { data: roleRow, error: roleError } = await supabase.from("user_roles").select("role").eq("user_id", session.user.id).single();
+    setRole(roleError ? "viewer" : roleRow?.role ?? "viewer"); setProjects(((projectData ?? []) as Project[]).map((project) => ({ ...project, code: project.project_number })));
     if (error) { setMessage(error.message); return; }
     const nextCases = (caseData ?? []) as unknown as VerificationCase[];
     setCases(nextCases); setSelectedId(preferredId ?? selectedId ?? nextCases[0]?.id ?? null);
@@ -63,7 +64,7 @@ export function VerificationWorkspace() {
     event.preventDefault(); const supabase = createClient();
     if (!supabase || !caseForm.projectId) return;
     const project = projects.find((item) => item.id === Number(caseForm.projectId));
-    const { data, error } = await supabase.from("verification_cases").insert({ project_id: Number(caseForm.projectId), title: caseForm.title, discipline: caseForm.discipline, profile: caseForm.profile, project_code: project?.code, object_name: project?.title }).select("id").single();
+    const { data, error } = await supabase.from("verification_cases").insert({ project_id: Number(caseForm.projectId), title: caseForm.title, discipline: caseForm.discipline, profile: caseForm.profile, project_code: project?.project_number, object_name: project?.title }).select("id").single();
     if (error) { setMessage(error.message); return; }
     const selectedProfile = verificationProfiles.find((item) => item.id === caseForm.profile) ?? verificationProfiles[0];
     const templateRows = [
