@@ -16,6 +16,18 @@ function extractDocxText(buffer: Buffer) {
   return xml.replace(/<w:tab\/>/g, " ").replace(/<w:br\/>/g, " ").replace(/<[^>]+>/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/\s+/g, " ").toLowerCase();
 }
 
+async function extractPdfText(buffer: Buffer) {
+  const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
+  const document = await pdfjs.getDocument({ data: new Uint8Array(buffer) }).promise;
+  const pageCount = Math.min(document.numPages, 500);
+  let text = "";
+  for (let pageNumber = 1; pageNumber <= pageCount; pageNumber += 1) {
+    const content = await (await document.getPage(pageNumber)).getTextContent();
+    text += ` ${content.items.map((item) => "str" in item ? item.str : "").join(" ")}`;
+  }
+  return text.toLowerCase();
+}
+
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const token = request.headers.get("authorization")?.replace(/^Bearer\s+/i, ""); const url = process.env.NEXT_PUBLIC_SUPABASE_URL; const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY; const { id } = await params;
   if (!token || !url || !key || !/^\d+$/.test(id)) return NextResponse.json({ error: "Требуется вход в систему." }, { status: 401 });
@@ -24,12 +36,17 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   const { data: roleRow } = await supabase.from("user_roles").select("role").eq("user_id", user.id).single();
   if (roleRow?.role !== "admin" && roleRow?.role !== "engineer") return NextResponse.json({ error: "Требуется роль инженера или администратора." }, { status: 403 });
   const { data: files } = await supabase.from("verification_files").select("file_name,content_type,size_bytes,blob_url").eq("verification_case_id", Number(id));
-  const docxFiles = (files ?? []).filter((file) => file.content_type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" && file.size_bytes <= 10 * 1024 * 1024);
-  if (!docxFiles.length) return NextResponse.json({ error: "Для автоматического анализа загрузите хотя бы один DOCX-файл до 10 МБ." }, { status: 400 });
+  const analyzableFiles = (files ?? []).filter((file) => (file.content_type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.content_type === "application/pdf") && file.size_bytes <= 100 * 1024 * 1024);
+  if (!analyzableFiles.length) return NextResponse.json({ error: "Для автоматического анализа загрузите хотя бы один PDF или DOCX-файл до 100 МБ." }, { status: 400 });
   let text = "";
-  for (const file of docxFiles) { const result = await get(file.blob_url, { access: "private" }); if (result?.statusCode === 200 && result.stream) text += ` ${extractDocxText(Buffer.from(await new Response(result.stream).arrayBuffer()))}`; }
+  for (const file of analyzableFiles) {
+    const result = await get(file.blob_url, { access: "private" });
+    if (result?.statusCode !== 200 || !result.stream) continue;
+    const buffer = Buffer.from(await new Response(result.stream).arrayBuffer());
+    text += ` ${file.content_type === "application/pdf" ? await extractPdfText(buffer) : extractDocxText(buffer)}`;
+  }
   const rows = rules.map((rule, index) => { const matched = rule.terms.some((term) => text.includes(term)); return { verification_case_id: Number(id), code: rule.code, section: rule.section, normative_reference: "Автоматическая предварительная проверка — подтвердить применимый пункт нормы вручную", requirement: rule.requirement, project_data: matched ? "Ключевые слова найдены в загруженном DOCX; проверьте контекст, планы и схемы." : "Ключевые слова в доступном тексте DOCX не найдены; проверьте файлы вручную.", assessment: matched ? "risk" : "incomplete", severity: matched ? "minor" : "normal", risk: "Автоматический поиск текста не подтверждает проектное решение и не анализирует чертежи.", correction: matched ? "Проверить полноту и соответствие решения на планах/схемах." : "Добавить или указать подтверждающие документы, схемы либо пояснения.", priority: "recommended", status: "open", sort_order: 500 + index }; });
   const { error } = await supabase.from("verification_findings").upsert(rows, { onConflict: "verification_case_id,code" });
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-  return NextResponse.json({ analyzedFiles: docxFiles.length, findings: rows.length, message: "Предварительный анализ завершён. Все результаты требуют ручной инженерной проверки." });
+  return NextResponse.json({ analyzedFiles: analyzableFiles.length, findings: rows.length, message: "Предварительный анализ завершён. Все результаты требуют ручной инженерной проверки." });
 }

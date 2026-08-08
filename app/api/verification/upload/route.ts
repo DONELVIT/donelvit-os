@@ -4,11 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 
 const allowedContentTypes = [
   "application/pdf",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  "application/msword",
-  "application/dwg",
-  "image/jpeg",
-  "image/png"
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 ];
 
 async function getUserId(request: Request) {
