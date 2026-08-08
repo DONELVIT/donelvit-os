@@ -1,7 +1,7 @@
 {
   "project": "DONELVIT OS MVP",
   "status_values": ["planned", "in-progress", "blocked", "complete"],
-  "active_feature_id": null,
+  "active_feature_id": "engineering-agent-001",
   "implementation_rule": "Work on exactly one planned feature at a time and only in this order unless the user explicitly reprioritizes it.",
   "features": [
     {
@@ -168,9 +168,9 @@
       "name": "Engineering AI agent foundation",
       "description": "Extend the verification module into a governed engineering AI workspace for normative checks, version comparison, fire-system engineering checks and expert-report generation.",
       "dependencies": ["verification-002"],
-      "status": "planned",
+      "status": "in-progress",
       "acceptance_criteria": ["A capability matrix and authoritative source/rights policy are approved before automated normative conclusions.", "Each specialised check exposes its inputs, evidence, limitations and human-review status.", "Generated DOCX conclusions are explicitly internal drafts unless released by an authorised expert.", "Any persistence of source versions, results or document edits has an approved Supabase/Drive data and access model."],
-      "evidence": "2026-08-06: User requested a full engineering AI agent covering NCM/CP/HG/EN checks, project-version comparison, cause-effect matrices, INIM address tables, address-line loading, power/acoustic calculations, DOCX opinions and suggested project corrections. This is intentionally planned after the transient-upload acceptance: exact document formats, calculation inputs, normative editions and approval workflow must be made explicit before each capability is implemented."
+      "evidence": "2026-08-07: User approved private Blob source-file storage, Supabase persistence, admin/engineer editing and viewer read-only access, and internal-draft wording. Applied approved migration add_verification_workspace: RLS-enabled verification_cases, verification_files, verification_findings and verification_calculations; reads require authenticated employees and writes require admin/engineer. The UI now creates project-linked dossiers, records private file references, findings and transparent people-count calculations; typecheck and RLS-policy audit passed. Still active: authoritative normative matrix, specialised calculation methods, protected download, DOCX draft generation and production role-flow acceptance."
     }
   ]
 }

@@ -171,6 +171,17 @@
 - [x] Production data audit: three active Clients exist and are readable; contract creation is available to authenticated users.
 - [x] Fixed stale client options in contract create/edit pages by forcing runtime rendering. `npm run typecheck` and `git diff --check` passed. Production deployment `dpl_DoSYDAZMYUFj4mAWmcYmrVoRGCfc` is READY; `/contracts/new` returned HTTP 200 with all three active client options.
 
+## 2026-08-07 Engineering Verification Workspace
+
+- [x] User approved protected result/file persistence and the `admin`/`engineer` edit, `viewer` read-only model. Applied Supabase migration `add_verification_workspace` with four RLS-enabled tables: cases, files, findings and calculations. Read policies require an authenticated employee; all mutations require `admin` or `engineer`.
+- [x] Replaced the read-only Verification page with a project-linked dossier workspace: dossier creation, private Blob file upload registration, findings register, official-source metadata links and a transparent people-count calculation with manual-review status.
+- [x] Added protected private-file delivery. The browser requests `/api/verification/files/[id]` with its authenticated session token; the route retrieves the file record under RLS and streams the private Blob with `private, no-cache` and attachment headers. Direct Blob URLs are never displayed.
+- [x] Added five project profiles to new dossiers and automatically materialises their fire-safety and documentation-completeness checks as structured finding rows. Each row starts as `incomplete` and instructs the engineer to confirm applicability, official edition and evidence before a conclusion.
+- [x] Added authenticated DOCX-draft generation at `/api/verification/[id]/report`. The document contains dossier/project metadata, registered files, the findings matrix, saved calculations and a mandatory internal-draft disclaimer. It is generated on demand and not saved as an official document.
+- [x] Added saved calculation templates for preliminary backup-power capacity (`ceil(I × t / discharge factor)`), acoustic-level comparison against an engineer-entered limit, and fire-category input with methodology basis. Every record remains `manual_review_required`; no template asserts compliance or selects a normative edition.
+- [x] Installed `@vercel/blob`; the upload-token route validates the current Supabase session and editor role before authorising only allowed document/image types. `npm run typecheck` and `git diff --check` passed. RLS policy audit returned all four tables with RLS enabled and no anon policies.
+- [ ] Remaining active scope: protected file download, verified normative matrix/check templates, specialised fire/energy/acoustic calculation inputs and methods, internal DOCX draft generation, and signed-in production acceptance for editor/viewer roles.
+
 ## Notes for Next Session
 
 Read `AGENTS.md`, this file, `docs/MVP-ROADMAP.md`, and `session-handoff.md`. Continue only `mvp-001` — Projects, then run `./init.ps1` before editing. Have the signed-in employee verify create, edit, and archive in the production UI; never create public signup or anonymous access.
