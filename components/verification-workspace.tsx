@@ -141,7 +141,18 @@ export function VerificationWorkspace() {
     const objectUrl = URL.createObjectURL(await response.blob()); const link = document.createElement("a"); link.href = objectUrl; link.download = `Отчёт_верификации_${selected.id}.docx`; link.click(); URL.revokeObjectURL(objectUrl);
   }
 
-  return <div className="space-y-6">{selected && <><div className="flex justify-end"><button type="button" onClick={() => void downloadDraft()} className="rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white">Сформировать DOCX-черновик</button></div>{canEdit && <VerificationCaseDecision caseId={selected.id} initialStatus={selected.status} initialVerdict={selected.verdict} onSaved={() => void loadCases(selected.id)} onMessage={setMessage}/>} {canEdit && <VerificationCalculationTemplates caseId={selected.id} onSaved={() => void loadDetails(selected.id)} onMessage={setMessage}/>}</>}
+  async function runAutomaticAnalysis() {
+    const supabase = createClient(); if (!supabase || !selected) return;
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.access_token) { setMessage("Сессия истекла. Войдите в систему повторно."); return; }
+    setMessage("Выполняется предварительный анализ DOCX-файлов…");
+    const response = await fetch(`/api/verification/${selected.id}/analyze`, { method: "POST", headers: { Authorization: `Bearer ${session.access_token}` } });
+    const body = await response.json() as { error?: string; message?: string };
+    setMessage(response.ok ? body.message ?? "Анализ завершён." : body.error ?? "Не удалось выполнить анализ.");
+    if (response.ok) await loadDetails(selected.id);
+  }
+
+  return <div className="space-y-6">{selected && <><div className="flex flex-wrap justify-end gap-2">{canEdit && <button type="button" onClick={() => void runAutomaticAnalysis()} className="rounded-xl bg-red-700 px-4 py-3 text-sm font-semibold text-white">Запустить автопроверку DOCX</button>}<button type="button" onClick={() => void downloadDraft()} className="rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white">Сформировать DOCX-черновик</button></div>{canEdit && <VerificationCaseDecision caseId={selected.id} initialStatus={selected.status} initialVerdict={selected.verdict} onSaved={() => void loadCases(selected.id)} onMessage={setMessage}/>} {canEdit && <VerificationCalculationTemplates caseId={selected.id} onSaved={() => void loadDetails(selected.id)} onMessage={setMessage}/>}</>}
     <section className="rounded-2xl border border-red-100 bg-gradient-to-br from-red-50 to-white p-6 shadow-panel"><div className="flex gap-3"><ShieldCheck className="mt-1 shrink-0 text-red-700"/><div><p className="text-sm font-semibold text-red-700">Внутренняя верификация проекта</p><h1 className="mt-1 text-3xl font-bold">Досье проверки проектных решений</h1><p className="mt-3 max-w-4xl text-slate-600">Файлы, исходные данные, замечания и расчёты сохраняются в досье проекта. Результат — рабочий черновик команды и не является официальным заключением или экспертизой.</p></div></div></section>
     {message && <p className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">{message}</p>}
     <div className="grid gap-6 xl:grid-cols-[20rem_1fr]"><aside className="space-y-4"><section className="rounded-2xl border bg-white p-4 shadow-panel"><div className="flex items-center gap-2 font-bold"><ClipboardCheck size={19} className="text-red-700"/>Досье</div><div className="mt-3 space-y-2">{cases.map((item) => <button type="button" onClick={() => setSelectedId(item.id)} key={item.id} className={`w-full rounded-xl border p-3 text-left text-sm ${item.id === selectedId ? "border-red-700 bg-red-50" : "hover:border-red-300"}`}><strong className="block">{item.title}</strong><span className="mt-1 block text-xs text-slate-500">{projectLabel(item) ?? `Проект #${item.project_id}`} · {item.status}</span></button>)}</div></section>
